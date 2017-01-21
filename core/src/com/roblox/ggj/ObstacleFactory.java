@@ -14,12 +14,15 @@ public class ObstacleFactory {
     public void createObstacle(ObstacleType type){
         Obstacle obstacle = null;
         switch (type){
-            case AUDITER:   obstacle = createAuditer();
-                            break;
-            case MEDIA:     obstacle = createMedia();
-                            break;
-            case ACTIVIST:  obstacle = createActivist();
-                            break;
+            case AUDITER:
+                obstacle = createAuditer();
+                break;
+            case MEDIA:
+                obstacle = createMedia();
+                break;
+            case ACTIVIST:
+                obstacle = createActivist();
+                break;
         }
 
         if (obstacle == null)
