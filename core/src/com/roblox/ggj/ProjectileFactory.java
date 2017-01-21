@@ -19,6 +19,8 @@ public class ProjectileFactory {
         Vector2 velocity, origin;
         if(type == ProjectileType.MONEY) {
             // From Trump, velocity is straight up
+            assert(obstacle == null);
+
             velocity = new Vector2(0, projectileSpeed);
             origin = new Vector2(trump.getX(), trump.getY());
         } else {
