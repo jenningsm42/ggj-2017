@@ -22,8 +22,15 @@ public abstract class Obstacle extends Actor {
 
     public abstract void interactWithTrump();
 
-    public boolean hasCollision(Obstacle Trump){
-        return true;
+    public boolean hasCollision(TrumpActor Trump){
+        if(this.sprite.getBoundingRectangle().contains(Trump.getSprite().getBoundingRectangle()))
+            return true;
+        else
+            return false;
+    }
+
+    public Sprite getSprite(){
+        return sprite;
     }
 
 
