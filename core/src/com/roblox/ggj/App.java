@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class App extends com.badlogic.gdx.Game {
-	public static final float scaleRatio = 8.f;
+	public static final float scaleRatio = 4.f;
 
 	@Override
 	public void create () {

@@ -41,7 +41,8 @@ public class ProjectileActor extends Actor {
         );
     }
 
-    public void update(float delta) {
+    @Override
+    public void act(float delta) {
         sprite.translate(velocity.x * delta, velocity.y * delta);
     }
 

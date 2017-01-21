@@ -34,12 +34,12 @@ public class Spawner {
         }
     }
 
-    public void updateSpawn(float delta){
-        if(spawnAux >= 5.f){
+    public void updateSpawn(float delta) {
+        if (spawnAux >= 5.f) {
             spawnAux = 0;
             spawn();
-        }
-        else{
+        } else {
             spawnAux += delta;
         }
+    }
 }
