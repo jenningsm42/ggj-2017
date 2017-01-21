@@ -11,8 +11,11 @@ public class Media extends Obstacle {
 
     public Media(){
         sprite = App.createScaledSprite(new Texture("Media.png"));
+        this.type = ObstacleType.MEDIA;
         super.spawn();
 
+        setWidth(sprite.getWidth());
+        setHeight(sprite.getHeight());
     }
 
     @Override

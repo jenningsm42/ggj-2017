@@ -17,6 +17,7 @@ public abstract class Obstacle extends Actor {
     protected float velocity;
     protected float screenTop = Gdx.graphics.getHeight();
     protected Random rand;
+    protected ObstacleType type;
 
 
     @Override
@@ -37,6 +38,10 @@ public abstract class Obstacle extends Actor {
 
     public Sprite getSprite(){
         return sprite;
+    }
+
+    public ObstacleType getType(){
+        return this.type;
     }
 
     protected void spawn(){

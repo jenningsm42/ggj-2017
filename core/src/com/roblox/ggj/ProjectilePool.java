@@ -22,4 +22,28 @@ public class ProjectilePool {
         projectiles.add(projectile);
         stage.addActor(projectile);
     }
+
+    public void detectCollisions(TrumpActor trump){
+        for(ProjectileActor proj : projectiles){
+            if(proj.hasCollision(trump)){
+                switch(proj.getType()){
+                    case AUDIT_NOTICE:
+                        auditCollision(trump);
+                        break;
+                    case NEWSPAPER:
+                        newspaperCollision(trump);
+                        break;
+                }
+            }
+        }
+    }
+
+    private void auditCollision(TrumpActor trump){
+        //do collision
+    }
+
+    private void newspaperCollision(TrumpActor trump){
+        //do collision
+    }
+
 }

@@ -11,7 +11,11 @@ public class Activist extends Obstacle {
 
     public Activist(){
         sprite = App.createScaledSprite(new Texture("Activist.png"));
+        this.type = ObstacleType.ACTIVIST;
         super.spawn();
+
+        setWidth(sprite.getWidth());
+        setHeight(sprite.getHeight());
 
     }
 

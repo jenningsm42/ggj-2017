@@ -41,6 +41,19 @@ public class ProjectileActor extends Actor {
         );
     }
 
+    public boolean hasCollision(TrumpActor Trump){
+        if(this.sprite.getBoundingRectangle().contains(Trump.getSprite().getBoundingRectangle()))
+            return true;
+        else
+            return false;
+    }
+
+    public Sprite getSprite(){
+        return sprite;
+    }
+
+    public ProjectileType getType(){ return type; }
+
     public void update(float delta) {
         sprite.translate(velocity.x * delta, velocity.y * delta);
     }
