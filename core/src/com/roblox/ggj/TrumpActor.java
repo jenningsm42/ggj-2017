@@ -8,24 +8,37 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by KaseiFox on 1/20/17.
  */
 
 public class TrumpActor extends Actor {
     private Sprite sprite;
+    private List<Texture> frames;
     private Vector2 velocity;
     private final float speed = 40.f * App.getPPU();
     private ProjectileFactory projectileFactory;
     private float moneyTime = 0.f;
+    private float animationTime = 0.f;
+    private int animationFrame = 0;
+    private final float animationDelay = 0.2f;
 
     private int money = 1000000;
     private int votes = 100000;
 
     TrumpActor(ProjectileFactory projectileFactory) {
-        sprite = App.createScaledSprite(new Texture("trump.png"));
+        frames = new ArrayList<Texture>();
+        frames.add(new Texture("trump_up_1.png"));
+        frames.add(new Texture("trump_up_2.png"));
+        frames.add(new Texture("trump_up_1.png"));
+        frames.add(new Texture("trump_up_3.png"));
+
+        sprite = App.createScaledSprite(frames.get(0));
         sprite.setX((Gdx.graphics.getWidth() - sprite.getWidth()) / 2.f);
-        sprite.setY(5.f * App.getPPU());
+        sprite.setY(15.f * App.getPPU());
 
         velocity = new Vector2();
 
@@ -70,12 +83,21 @@ public class TrumpActor extends Actor {
             }
         } else velocity.setLength2(0);
 
+        if(animationTime >= animationDelay) {
+            animationTime = 0.f;
+            animationFrame++;
+            if(animationFrame >= 3) animationFrame = 0;
+
+            sprite.setTexture(frames.get(animationFrame));
+        }
+
         sprite.translate(velocity.x, velocity.y);
 
         setX(sprite.getX() + sprite.getWidth() / 2.f);
         setY(sprite.getY() + sprite.getHeight() / 2.f);
 
         moneyTime += delta;
+        animationTime += delta;
     }
 
     @Override

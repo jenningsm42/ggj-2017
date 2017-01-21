@@ -21,17 +21,16 @@ public class ProjectileActor extends Actor {
 
         Texture texture;
         switch(type) {
-            case MONEY:
-                texture = new Texture("proj_money.png");
-                break;
             case NEWSPAPER:
                 texture = new Texture("proj_newspaper.png");
                 break;
             case AUDIT_NOTICE:
                 texture = new Texture("proj_audit_notice.png");
                 break;
+            case MONEY:
             default:
                 texture = new Texture("proj_money.png");
+                break;
         }
         sprite = App.createScaledSprite(texture);
 

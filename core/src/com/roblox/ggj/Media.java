@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Media extends Obstacle {
 
     public Media(){
-        sprite = App.createScaledSprite(new Texture("Media.png"));
+        sprite = App.createScaledSprite(new Texture("media.png"));
         super.spawn();
 
     }
