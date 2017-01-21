@@ -1,52 +1,41 @@
 package com.roblox.ggj;
 
+import com.badlogic.gdx.Gdx;
+
+import java.util.Random;
+
 /**
  * Created by ben on 21/01/17.
  */
 
 public class ObstacleFactory {
     private ObstaclePool pool;
+    private Random rand;
+    private float speed = 30.f;
 
-    public ObstacleFactory(ObstaclePool pool){
+    public ObstacleFactory(ObstaclePool pool) {
         this.pool = pool;
+        rand = new Random();
     }
 
-    public void createObstacle(ObstacleType type){
-        Obstacle obstacle = null;
-        switch (type){
-            case AUDITER:
-                obstacle = createAuditer();
+    public void createObstacle(ObstacleType type) {
+        Obstacle obstacle;
+        switch (type) {
+            case AUDITOR:
+                obstacle = new Auditor(speed * App.getPPU());
                 break;
             case MEDIA:
-                obstacle = createMedia();
+                obstacle = new Media(speed * App.getPPU());
                 break;
             case ACTIVIST:
-                obstacle = createActivist();
+                obstacle = new Activist(speed * App.getPPU());
                 break;
+            default:
+                return;
         }
 
-        if (obstacle == null)
-            return;
-        else {
-            pool.addObstacle(obstacle);
-            //might want to add some other functionality in here after
-            //adding it to the pool
-        }
+        float randX = rand.nextFloat() * Gdx.graphics.getWidth() - obstacle.getSprite().getWidth();
+        obstacle.getSprite().setPosition(randX, Gdx.graphics.getHeight());
+        pool.addObstacle(obstacle);
     }
-
-    private Obstacle createAuditer(){
-        Obstacle obstacle = new Auditor();
-        return obstacle;
-    }
-
-    private Obstacle createMedia(){
-        Obstacle obstacle = new Media();
-        return obstacle;
-    }
-
-    private Obstacle createActivist(){
-        Obstacle obstacle = new Activist();
-        return obstacle;
-    }
-
 }

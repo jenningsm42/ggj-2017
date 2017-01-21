@@ -54,6 +54,24 @@ public class TrumpActor extends Actor {
         return sprite;
     }
 
+    public void addMoney(int amount) {
+        // Allow negative amounts (debt)
+        money += amount;
+    }
+
+    public void addVotes(int amount) {
+        votes += amount;
+        if(votes < 0) votes = 0;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
     @Override
     public void act(float delta) {
         if(Gdx.input.isTouched()) {
@@ -64,13 +82,13 @@ public class TrumpActor extends Actor {
                 // Move trump
                 float length = Math.abs(sprite.getX() + sprite.getWidth() / 2.f - x) / App.getPPU();
 
-                if (length > 5.f) {
+                if (length > 1.f) {
                     float dx = x - (sprite.getX() + sprite.getWidth() / 2.f);
                     float dy = y - (sprite.getY() + sprite.getHeight() / 2.f);
 
                     velocity.set(dx, 0);
                     velocity.setLength(speed * delta);
-                } else if (length < 1.f) {
+                } else {
                     velocity.setLength2(0);
                 }
             } else {
@@ -86,7 +104,7 @@ public class TrumpActor extends Actor {
         if(animationTime >= animationDelay) {
             animationTime = 0.f;
             animationFrame++;
-            if(animationFrame >= 3) animationFrame = 0;
+            if(animationFrame >= 4) animationFrame = 0;
 
             sprite.setTexture(frames.get(animationFrame));
         }

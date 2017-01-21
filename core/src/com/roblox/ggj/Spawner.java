@@ -24,7 +24,7 @@ public class Spawner {
         int randomNum = rand.nextInt((max - min) + 1) + min;
         switch(randomNum){
             case 0:
-                factory.createObstacle(ObstacleType.AUDITER);
+                factory.createObstacle(ObstacleType.AUDITOR);
                 break;
             case 1:
                 factory.createObstacle(ObstacleType.MEDIA);

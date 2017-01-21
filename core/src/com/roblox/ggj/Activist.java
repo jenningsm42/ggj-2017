@@ -9,23 +9,27 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Activist extends Obstacle {
 
-    public Activist(){
-        sprite = App.createScaledSprite(new Texture("activist.png"));
-        this.type = ObstacleType.ACTIVIST;
-        super.spawn();
+    public Activist(float speed){
+        super(speed);
+
+        frames.add(new Texture("activist.png"));
+        sprite = App.createScaledSprite(frames.get(0));
+        type = ObstacleType.ACTIVIST;
 
         setWidth(sprite.getWidth());
         setHeight(sprite.getHeight());
-
     }
 
     @Override
-    public void update(float delta) {
+    public void act(float delta) {
+        super.act(delta);
+        sprite.translate(velocity.x * delta, velocity.y * delta);
         setCoordinateFields();
     }
 
     public void kill() {
         //TODO: play distruction animation
+        clear();
     }
 
     public void attack(){

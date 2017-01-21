@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  * Created by KaseiFox on 1/20/17.
  */
@@ -19,6 +22,8 @@ public class GameScreen implements Screen {
     private ObstacleFactory obstacleFactory;
     private Spawner spawner;
 
+    private TrumpActor trump;
+
     public GameScreen(App app) {
         this.app = app;
     }
@@ -31,11 +36,13 @@ public class GameScreen implements Screen {
         projectilePool = new ProjectilePool(stage);
         projectileFactory = new ProjectileFactory(projectilePool);
 
-        obstaclePool = new ObstaclePool();
+        obstaclePool = new ObstaclePool(stage);
         obstacleFactory = new ObstacleFactory(obstaclePool);
         spawner = new Spawner(obstacleFactory);
 
-        stage.addActor(new TrumpActor(projectileFactory));
+        trump = new TrumpActor(projectileFactory);
+
+        stage.addActor(trump);
     }
 
     @Override
@@ -45,8 +52,24 @@ public class GameScreen implements Screen {
 
         spawner.updateSpawn(delta);
 
+        obstaclePool.detectCollisions(trump);
+        projectilePool.detectCollisions(trump);
+
         stage.act(delta);
         stage.draw();
+
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
+        String moneyStr = "Money: " + (trump.getMoney() < 0? "-$" : "$") + numberFormat.format(Math.abs(trump.getMoney()));
+        String votesStr = "Votes: " + numberFormat.format(trump.getVotes() / 1000) + "K";
+
+        stage.getBatch().begin();
+        app.getFont().draw(stage.getBatch(), moneyStr,
+            1.f * App.getPPU(),
+            Gdx.graphics.getHeight() - 1.f * App.getPPU());
+        app.getFont().draw(stage.getBatch(), votesStr,
+            1.f * App.getPPU(),
+            Gdx.graphics.getHeight() - (1.f * App.getPPU() + 18 * Math.round(App.scaleRatio)));
+        stage.getBatch().end();
     }
 
     @Override

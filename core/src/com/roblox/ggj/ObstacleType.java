@@ -5,5 +5,5 @@ package com.roblox.ggj;
  */
 
 public enum ObstacleType {
-    AUDITER, ACTIVIST, MEDIA, CLINTON, SANDERS, CRUZ
+    AUDITOR, ACTIVIST, MEDIA, CLINTON, SANDERS, CRUZ
 }
