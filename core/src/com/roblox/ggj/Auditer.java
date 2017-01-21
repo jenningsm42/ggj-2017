@@ -13,6 +13,13 @@ public class Auditer extends Obstacle {
         sprite = App.createScaledSprite(new Texture("Auditer.png"));
         super.spawn();
 
+        setWidth(sprite.getWidth());
+        setHeight(sprite.getHeight());
+    }
+
+    @Override
+    public void update(float delta) {
+        setCoordinateFields();
     }
 
     public void kill() {

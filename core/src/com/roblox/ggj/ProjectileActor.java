@@ -35,7 +35,14 @@ public class ProjectileActor extends Actor {
         }
         sprite = App.createScaledSprite(texture);
 
-        sprite.setPosition(origin.x, origin.y);
+        sprite.setPosition(
+                origin.x - sprite.getWidth() / 2.f,
+                origin.y - sprite.getHeight() / 2.f
+        );
+    }
+
+    public void update(float delta) {
+        sprite.translate(velocity.x * delta, velocity.y * delta);
     }
 
     @Override

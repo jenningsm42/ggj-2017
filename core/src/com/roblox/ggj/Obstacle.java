@@ -24,6 +24,8 @@ public abstract class Obstacle extends Actor {
         sprite.draw(batch);
     }
 
+    public abstract void update(float delta);
+
     public abstract void kill();
 
     public boolean hasCollision(TrumpActor Trump){
@@ -47,5 +49,4 @@ public abstract class Obstacle extends Actor {
         setX(sprite.getX() + sprite.getWidth() / 2.f);
         setY(sprite.getY() + sprite.getHeight() / 2.f);
     }
-
 }

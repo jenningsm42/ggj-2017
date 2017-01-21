@@ -42,6 +42,4 @@ public class Spawner {
         else{
             spawnAux += delta;
         }
-    }
-
 }

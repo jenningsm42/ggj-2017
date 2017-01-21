@@ -15,6 +15,11 @@ public class Media extends Obstacle {
 
     }
 
+    @Override
+    public void update(float delta) {
+        setCoordinateFields();
+    }
+
     public void kill() {
         //TODO: play distruction animation
     }

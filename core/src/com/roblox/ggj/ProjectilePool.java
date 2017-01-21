@@ -2,6 +2,7 @@ package com.roblox.ggj;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ public class ProjectilePool {
 
     public ProjectilePool(Stage stage) {
         this.stage = stage;
+        projectiles = new ArrayList<ProjectileActor>();
     }
 
     public void addProjectile(ProjectileActor projectile) {
