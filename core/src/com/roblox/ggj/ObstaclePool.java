@@ -22,7 +22,7 @@ public class ObstaclePool {
     private void removeObstacle(Obstacle obstacle){
         obstacles.remove(obstacle);
     }
-    
+
 
     public void detectCollisions(TrumpActor trump){
         for(Obstacle obstacle : obstacles){

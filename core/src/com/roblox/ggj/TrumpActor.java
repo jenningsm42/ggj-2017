@@ -17,6 +17,7 @@ public class TrumpActor extends Actor {
     private Vector2 velocity;
     private final float speed = 40.f * App.getPPU();
     private ProjectileFactory projectileFactory;
+    private float moneyTime = 0.f;
 
     private int money = 1000000;
     private int votes = 100000;
@@ -61,8 +62,9 @@ public class TrumpActor extends Actor {
                 }
             } else {
                 // Throw money
-                if(money  >= 50000) {
+                if(money  >= 50000 && moneyTime > 1.f) {
                     money -= 50000;
+                    moneyTime = 0.f;
                     projectileFactory.createProjectile(null, this, ProjectileType.MONEY);
                 }
             }
@@ -72,6 +74,8 @@ public class TrumpActor extends Actor {
 
         setX(sprite.getX() + sprite.getWidth() / 2.f);
         setY(sprite.getY() + sprite.getHeight() / 2.f);
+
+        moneyTime += delta;
     }
 
     @Override
