@@ -21,7 +21,7 @@ public class ObstaclePool {
         obstacles.remove(obstacle);
     }
 
-    public Obstacle detectCollisions(Obstacle trump){
+    public Obstacle detectCollisions(TrumpActor trump){
         for(Obstacle obstacle : obstacles){
             if(obstacle.hasCollision(trump)){
                 return obstacle;

@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class GameScreen implements Screen {
     private App app;
     private Stage stage;
+    private ProjectilePool projectilePool;
+    private ProjectileFactory projectileFactory;
 
     public GameScreen(App app) {
         this.app = app;
@@ -23,7 +25,10 @@ public class GameScreen implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        stage.addActor(new TrumpActor());
+        projectilePool = new ProjectilePool(stage);
+        projectileFactory = new ProjectileFactory(projectilePool);
+
+        stage.addActor(new TrumpActor(projectileFactory));
     }
 
     @Override

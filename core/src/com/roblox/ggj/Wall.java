@@ -13,6 +13,11 @@ public class Wall extends Obstacle {
         sprite = App.createScaledSprite(new Texture("wall.png"));
     }
 
+    @Override
+    public void update(float delta) {
+
+    }
+
     public void kill(){
         //TODO: play destruction animation
 

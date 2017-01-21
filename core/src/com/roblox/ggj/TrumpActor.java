@@ -18,6 +18,9 @@ public class TrumpActor extends Actor {
     private final float speed = 40.f * App.getPPU();
     private ProjectileFactory projectileFactory;
 
+    private int money = 1000000;
+    private int votes = 100000;
+
     TrumpActor(ProjectileFactory projectileFactory) {
         sprite = App.createScaledSprite(new Texture("trump.png"));
         sprite.setX((Gdx.graphics.getWidth() - sprite.getWidth()) / 2.f);
@@ -58,7 +61,10 @@ public class TrumpActor extends Actor {
                 }
             } else {
                 // Throw money
-                projectileFactory.createProjectile(null, this, ProjectileType.MONEY);
+                if(money  >= 50000) {
+                    money -= 50000;
+                    projectileFactory.createProjectile(null, this, ProjectileType.MONEY);
+                }
             }
         } else velocity.setLength2(0);
 

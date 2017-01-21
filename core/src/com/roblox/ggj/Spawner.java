@@ -20,12 +20,14 @@ public class Spawner {
     }
 
     public void startSpawningEnemies(){
+        /*
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
 
             }
         } float delaySeconds, float intervalSeconds);
+        */
     }
 
 }
