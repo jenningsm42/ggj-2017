@@ -17,6 +17,7 @@ public class Spawner {
 
     public Spawner(ObstacleFactory factory) {
         this.factory = factory;
+        rand = new Random();
     }
 
     private void spawn(){

@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Activist extends Obstacle {
 
     public Activist(){
-        sprite = App.createScaledSprite(new Texture("Activist.png"));
+        sprite = App.createScaledSprite(new Texture("activist.png"));
         this.type = ObstacleType.ACTIVIST;
         super.spawn();
 

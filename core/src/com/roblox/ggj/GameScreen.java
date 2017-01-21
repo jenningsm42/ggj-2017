@@ -15,6 +15,9 @@ public class GameScreen implements Screen {
     private Stage stage;
     private ProjectilePool projectilePool;
     private ProjectileFactory projectileFactory;
+    private ObstaclePool obstaclePool;
+    private ObstacleFactory obstacleFactory;
+    private Spawner spawner;
 
     public GameScreen(App app) {
         this.app = app;
@@ -28,6 +31,10 @@ public class GameScreen implements Screen {
         projectilePool = new ProjectilePool(stage);
         projectileFactory = new ProjectileFactory(projectilePool);
 
+        obstaclePool = new ObstaclePool();
+        obstacleFactory = new ObstacleFactory(obstaclePool);
+        spawner = new Spawner(obstacleFactory);
+
         stage.addActor(new TrumpActor(projectileFactory));
     }
 
@@ -35,6 +42,8 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        spawner.updateSpawn(delta);
 
         stage.act(delta);
         stage.draw();

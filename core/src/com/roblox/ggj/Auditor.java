@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.Texture;
  * Created by ben on 21/01/17.
  */
 
-public class Auditer extends Obstacle {
+public class Auditor extends Obstacle {
 
-    public Auditer(){
-        sprite = App.createScaledSprite(new Texture("Auditer.png"));
+    public Auditor(){
+        sprite = App.createScaledSprite(new Texture("auditor.png"));
         this.type = ObstacleType.AUDITER;
         super.spawn();
 

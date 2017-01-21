@@ -7,8 +7,8 @@ package com.roblox.ggj;
 public class ObstacleFactory {
     private ObstaclePool pool;
 
-    public ObstacleFactory(){
-        pool = new ObstaclePool();
+    public ObstacleFactory(ObstaclePool pool){
+        this.pool = pool;
     }
 
     public void createObstacle(ObstacleType type){
@@ -35,7 +35,7 @@ public class ObstacleFactory {
     }
 
     private Obstacle createAuditer(){
-        Obstacle obstacle = new Auditer();
+        Obstacle obstacle = new Auditor();
         return obstacle;
     }
 

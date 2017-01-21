@@ -45,6 +45,7 @@ public abstract class Obstacle extends Actor {
     }
 
     protected void spawn(){
+        rand = new Random();
         float randWidth = rand.nextFloat() * Gdx.graphics.getWidth() - sprite.getWidth();
         sprite.setX(randWidth);
         sprite.setY(screenTop);
