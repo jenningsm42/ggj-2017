@@ -11,8 +11,7 @@ public class Auditer extends Obstacle {
 
     public Auditer(){
         sprite = App.createScaledSprite(new Texture("Auditer.png"));
-        sprite.setX(Gdx.graphics.getWidth() - sprite.getWidth() / 2.f);
-        sprite.setY(5.f * App.getPPU());
+        super.spawn();
 
     }
 

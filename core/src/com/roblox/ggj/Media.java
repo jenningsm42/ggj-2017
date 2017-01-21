@@ -11,8 +11,7 @@ public class Media extends Obstacle {
 
     public Media(){
         sprite = App.createScaledSprite(new Texture("Media.png"));
-        sprite.setX(Gdx.graphics.getWidth() - sprite.getWidth() / 2.f);
-        sprite.setY(5.f * App.getPPU());
+        super.spawn();
 
     }
 

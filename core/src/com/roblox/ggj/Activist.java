@@ -11,8 +11,7 @@ public class Activist extends Obstacle {
 
     public Activist(){
         sprite = App.createScaledSprite(new Texture("Activist.png"));
-        sprite.setX(Gdx.graphics.getWidth() - sprite.getWidth() / 2.f);
-        sprite.setY(5.f * App.getPPU());
+        super.spawn();
 
     }
 
