@@ -1,6 +1,7 @@
 package com.roblox.ggj;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -14,14 +15,19 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class TrumpActor extends Actor {
     private Sprite sprite;
     private Vector2 velocity;
-    private final float speed = 20.f * App.getPPU();
+    private final float speed = 40.f * App.getPPU();
 
-    TrumpActor() {
+    TrumpActor(ProjectileFactory projectileFactory) {
         sprite = App.createScaledSprite(new Texture("trump.png"));
         sprite.setX((Gdx.graphics.getWidth() - sprite.getWidth()) / 2.f);
         sprite.setY(5.f * App.getPPU());
 
         velocity = new Vector2();
+
+        setX(sprite.getX() + sprite.getWidth() / 2.f);
+        setY(sprite.getY() + sprite.getHeight() / 2.f);
+        setWidth(sprite.getWidth());
+        setHeight(sprite.getHeight());
     }
 
     public Sprite getSprite(){
@@ -32,14 +38,24 @@ public class TrumpActor extends Actor {
     public void act(float delta) {
         if(Gdx.input.isTouched()) {
             float x = Gdx.input.getX();
-            float y = Gdx.input.getY();
+            float y = Gdx.graphics.getHeight() - Gdx.input.getY();
 
-            if(!sprite.getBoundingRectangle().contains(x, y)) {
-                float dx = x - (sprite.getX() + sprite.getWidth() / 2.f);
-                float dy = y - (sprite.getY() + sprite.getHeight() / 2.f);
+            if(y / App.getPPU() < 20.f) {
+                // Move trump
+                float length = Math.abs(sprite.getX() + sprite.getWidth() / 2.f - x) / App.getPPU();
 
-                velocity.set(dx, dy);
-                velocity.setLength(speed);
+                if (length > 5.f) {
+                    float dx = x - (sprite.getX() + sprite.getWidth() / 2.f);
+                    float dy = y - (sprite.getY() + sprite.getHeight() / 2.f);
+
+                    velocity.set(dx, 0);
+                    velocity.setLength(speed * delta);
+                } else if (length < 1.f) {
+                    velocity.setLength2(0);
+                }
+            } else {
+                // Throw money
+
             }
         } else velocity.setLength2(0);
 

@@ -31,6 +31,9 @@ public abstract class Obstacle extends Actor {
         return sprite;
     }
 
-
+    protected void setCoordinateFields() {
+        setX(sprite.getX() + sprite.getWidth() / 2.f);
+        setY(sprite.getY() + sprite.getHeight() / 2.f);
+    }
 
 }
