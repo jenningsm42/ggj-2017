@@ -25,6 +25,10 @@ public class TrumpActor extends Actor {
         velocity = new Vector2();
     }
 
+    public Sprite getSprite(){
+        return sprite;
+    }
+
     @Override
     public void act(float delta) {
         if(Gdx.input.isTouched()) {

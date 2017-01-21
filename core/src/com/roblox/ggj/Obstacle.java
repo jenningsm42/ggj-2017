@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public abstract class Obstacle extends Actor {
     protected Sprite sprite;
     protected int health;
-    protected float speed;
+    protected float velocity;
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
@@ -20,10 +20,15 @@ public abstract class Obstacle extends Actor {
 
     public abstract void kill();
 
-    public abstract void interactWithTrump();
+    public boolean hasCollision(TrumpActor Trump){
+        if(this.sprite.getBoundingRectangle().contains(Trump.getSprite().getBoundingRectangle()))
+            return true;
+        else
+            return false;
+    }
 
-    public boolean hasCollision(Obstacle Trump){
-        return true;
+    public Sprite getSprite(){
+        return sprite;
     }
 
 

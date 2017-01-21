@@ -18,9 +18,5 @@ public class Wall extends Obstacle {
 
     }
 
-    public void interactWithTrump(){
-
-    }
-
 }
 
