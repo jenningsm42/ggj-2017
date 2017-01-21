@@ -1,16 +1,18 @@
 package com.roblox.ggj;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by ben on 20/01/17.
  */
 
 public class ObstaclePool {
-    HashSet<Obstacle> obstacles;
+    List<Obstacle> obstacles;
 
     public ObstaclePool(){
-        obstacles = new HashSet<Obstacle>();
+        obstacles = new ArrayList<Obstacle>();
     }
 
     public void addObstacle(Obstacle obstacle){
@@ -21,12 +23,34 @@ public class ObstaclePool {
         obstacles.remove(obstacle);
     }
 
-    public Obstacle detectCollisions(TrumpActor trump){
+
+    public void detectCollisions(TrumpActor trump){
         for(Obstacle obstacle : obstacles){
             if(obstacle.hasCollision(trump)){
-                return obstacle;
+                switch(obstacle.getType()){
+                    case ACTIVIST:
+                        activistCollision(trump);
+                        break;
+                    case AUDITER:
+                        auditerCollision(trump);
+                        break;
+                    case MEDIA:
+                        mediaCollision(trump);
+                        break;
+                }
             }
         }
-        return null;
+    }
+
+    private void activistCollision(TrumpActor Trump){
+        //do collision
+    }
+
+    private void auditerCollision(TrumpActor Trump){
+        //do collision
+    }
+
+    private void mediaCollision(TrumpActor Trump){
+        //do collision
     }
 }
