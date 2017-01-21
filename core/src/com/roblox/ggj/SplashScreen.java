@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Timer;
 
 /**
  * Created by KaseiFox on 1/20/17.
@@ -22,7 +23,7 @@ public class SplashScreen implements Screen {
 
         public SplashActor() {
             splash = App.createScaledSprite(new Texture("splash.png"));
-            splash.setPosition((Gdx.graphics.getWidth() - splash.getWidth()) / 2.f - 200.f, (Gdx.graphics.getHeight() - splash.getHeight()) / 2.f);
+            splash.setPosition((Gdx.graphics.getWidth() - splash.getWidth()) / 2.f, (Gdx.graphics.getHeight() - splash.getHeight()) / 2.f);
         }
 
         @Override
@@ -41,6 +42,13 @@ public class SplashScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         stage.addActor(new SplashActor());
+
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                app.setScreen(new GameScreen(app));
+            }
+        }, 2.f);
     }
 
     @Override
