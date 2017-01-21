@@ -14,12 +14,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class TrumpActor extends Actor {
     private Sprite sprite;
     private Vector2 velocity;
-    private final float speed = 20.f * App.ppu;
+    private final float speed = 20.f * App.getPPU();
 
     TrumpActor() {
         sprite = App.createScaledSprite(new Texture("trump.png"));
         sprite.setX((Gdx.graphics.getWidth() - sprite.getWidth()) / 2.f);
-        sprite.setY(5.f * App.ppu);
+        sprite.setY(5.f * App.getPPU());
 
         velocity = new Vector2();
     }

@@ -9,8 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class App extends com.badlogic.gdx.Game {
 	public static final float scaleRatio = 8.f;
-	public static final float ppu = Gdx.graphics.getHeight() / 100.f;
-	
+
 	@Override
 	public void create () {
 		setScreen(new SplashScreen(this));
@@ -21,5 +20,9 @@ public class App extends com.badlogic.gdx.Game {
 		sprite.setSize(sprite.getWidth() * scaleRatio,
 				sprite.getHeight() * scaleRatio);
 		return sprite;
+	}
+
+	public static float getPPU() {
+		return Gdx.graphics.getHeight() / 100.f;
 	}
 }
