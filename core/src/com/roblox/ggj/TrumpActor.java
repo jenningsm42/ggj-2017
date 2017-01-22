@@ -72,9 +72,13 @@ public class TrumpActor extends Actor {
         return votes;
     }
 
+    public void setVelocity(Vector2 vector){
+        this.velocity = vector;
+    }
+
     @Override
     public void act(float delta) {
-        if(Gdx.input.isTouched()) {
+        /*if(Gdx.input.isTouched()) {
             float x = Gdx.input.getX();
             float y = Gdx.graphics.getHeight() - Gdx.input.getY();
 
@@ -99,8 +103,9 @@ public class TrumpActor extends Actor {
                     projectileFactory.createProjectile(null, this, ProjectileType.MONEY);
                 }
             }
-        } else velocity.setLength2(0);
 
+        } else velocity.setLength2(0);
+        */
         if(animationTime >= animationDelay) {
             animationTime = 0.f;
             animationFrame++;
