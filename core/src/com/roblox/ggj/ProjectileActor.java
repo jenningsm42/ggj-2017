@@ -20,6 +20,8 @@ public class ProjectileActor extends Actor {
     private float animationTime = 0.f;
     private int animationFrame = 0;
     private Vector2 velocity;
+    private float accelX = 0.f; // For slurs only
+    private float time = 0.f; // ^^^^
     private ProjectileType type;
 
 
@@ -75,7 +77,18 @@ public class ProjectileActor extends Actor {
             if(++animationFrame >= frames.size()) animationFrame = 0;
             sprite.setTexture(frames.get(animationFrame));
         }
+
+        if(type == ProjectileType.SLUR)
+            slurBehavior(delta);
+
         sprite.translate(velocity.x * delta, velocity.y * delta);
+    }
+
+    public void slurBehavior(float delta) {
+        time += delta;
+        accelX = -230.f * App.getPPU() * (float)Math.cos(4.f * time);
+        velocity.x += accelX * delta;
+        velocity.setLength(ProjectileFactory.projectileSpeed);
     }
 
     @Override

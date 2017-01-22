@@ -14,6 +14,7 @@ public class ObstacleFactory {
     private TrumpActor trump;
     private Random rand;
     private float speed = 30.f;
+    private final int maxObstacles = 5;
 
     public ObstacleFactory(ObstaclePool pool, ProjectileFactory projectileFactory, TrumpActor trump) {
         this.pool = pool;
@@ -23,6 +24,7 @@ public class ObstacleFactory {
     }
 
     public void createObstacle(ObstacleType type) {
+        if(pool.getObstacles().size() >= maxObstacles) return;
         Obstacle obstacle;
         switch (type) {
             case AUDITOR:
