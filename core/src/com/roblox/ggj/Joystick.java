@@ -16,7 +16,7 @@ public class Joystick extends Actor {
     private Texture texture;
     private float xCenter;
     private float yCenter;
-    private double radius;
+    private float radius;
     private TrumpActor trump;
 
 
@@ -25,9 +25,7 @@ public class Joystick extends Actor {
         sprite = App.createScaledSprite(texture);
         sprite.setX(1.f * App.getPPU());
         sprite.setY(1.f * App.getPPU());
-        double magnitudeSqrd = sprite.getWidth() * sprite.getWidth() +
-                sprite.getHeight() * sprite.getHeight();
-        radius = Math.sqrt(magnitudeSqrd);
+        radius = sprite.getWidth() / 2.f;
 
         xCenter = sprite.getX() + sprite.getWidth() / 2.f;
         yCenter = sprite.getY() + sprite.getHeight() / 2.f;
@@ -61,7 +59,7 @@ public class Joystick extends Actor {
         Vector2 vector = new Vector2(dx, dy);
         if(vector.len() > radius) return new Vector2();
 
-        vector.setLength2(1.f);
+        vector.scl(1.f / radius);
         return vector;
     }
 }

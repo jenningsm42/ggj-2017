@@ -40,6 +40,7 @@ public class ObstacleFactory {
 
         float randX = rand.nextFloat() * Gdx.graphics.getWidth() - obstacle.getSprite().getWidth();
         obstacle.getSprite().setPosition(randX, Gdx.graphics.getHeight());
+        obstacle.setCoordinateFields();
         pool.addObstacle(obstacle);
     }
 }
