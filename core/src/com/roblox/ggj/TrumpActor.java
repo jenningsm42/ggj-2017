@@ -33,8 +33,8 @@ public class TrumpActor extends Actor {
     private int money = 1000000;
     private int votes = 1000000;
     private float moneyRate = 0.005f;
-    private float moneyGainTime = 5.f;
-    private float moneyGainDelay = 5.f; // When hit by an audit notice
+    private float moneyGainDelay = 3.f; // When hit by an audit notice
+    private float moneyGainTime = moneyGainDelay;
 
     TrumpActor(ProjectileFactory projectileFactory, App app) {
         frames = new ArrayList<Texture>();
