@@ -1,6 +1,7 @@
 package com.roblox.ggj;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -11,6 +12,7 @@ public class Auditor extends Obstacle {
     private float accelerationX;
     private final float maxAccel = 28.f * App.getPPU();
     private final float maxXVel = 10.f * App.getPPU();
+    private Sound terribleOrganization;
 
     public Auditor(float speed, ProjectileFactory projectileFactory, TrumpActor trump){
         super(speed, projectileFactory, trump);
@@ -26,6 +28,8 @@ public class Auditor extends Obstacle {
         setHeight(sprite.getHeight());
         lives = 2;
         accelerationX = 0.f;
+
+        terribleOrganization = Gdx.audio.newSound(Gdx.files.internal("terrible_organization.wav"));
     }
 
     @Override
@@ -44,6 +48,7 @@ public class Auditor extends Obstacle {
 
     public void kill() {
         //TODO: play distruction animation
+        terribleOrganization.play(1.0f);
         remove();
     }
 

@@ -4,51 +4,29 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 
 /**
- * Created by KaseiFox on 1/20/17.
+ * Created by KaseiFox on 1/22/17.
  */
 
-public class SplashScreen implements Screen {
+public class GameOverScreen implements Screen {
     private App app;
     private Stage stage;
-    private Sound millionDollars;
+    private Sound politicalBS;
     private boolean soundPlayed = false;
 
-    private class SplashActor extends Actor {
-        private Sprite splash;
-
-
-        public SplashActor() {
-            splash = App.createScaledSprite(new Texture("splash.png"));
-            splash.setPosition((Gdx.graphics.getWidth() - splash.getWidth()) / 2.f, (Gdx.graphics.getHeight() - splash.getHeight()) / 2.f);
-
-        }
-
-        @Override
-        public void draw(Batch batch, float parentAlpha) {
-            splash.draw(batch);
-        }
-    }
-
-    public SplashScreen(App app) {
+    public GameOverScreen(App app) {
         this.app = app;
-        millionDollars = Gdx.audio.newSound(Gdx.files.internal("million_dollars.wav"));
-
+        politicalBS = Gdx.audio.newSound(Gdx.files.internal("bullshit.wav"));
     }
 
     @Override
     public void show() {
         stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
-
-        stage.addActor(new SplashActor());
+        stage.addActor(new Actor());
 
         Timer.schedule(new Timer.Task() {
             @Override
@@ -66,8 +44,12 @@ public class SplashScreen implements Screen {
         stage.act(delta);
         stage.draw();
 
+        stage.getBatch().begin();
+        app.getFont().draw(stage.getBatch(), "You didn't become\npresident", 0, Gdx.graphics.getHeight());
+        stage.getBatch().end();
+
         while(!soundPlayed)
-            soundPlayed = (millionDollars.play(1.f) != -1);
+            soundPlayed = (politicalBS.play(1.f) != -1);
     }
 
     @Override

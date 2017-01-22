@@ -62,7 +62,7 @@ public class Joystick extends Actor {
                 float dy = y - yCenter;
 
                 vector.set(dx, dy);
-                if(vector.len2() > radius * radius) continue;
+                if(vector.len2() > radius * radius || vector.len2() < (radius * radius) / 100.f) continue;
 
                 pointer = i;
                 vector.scl(1.f / radius);
@@ -78,16 +78,5 @@ public class Joystick extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha){
         sprite.draw(batch);
-    }
-
-    private Vector2 getVector(float xInput, float yInput){
-        float dx = xInput - xCenter;
-        float dy = yInput - yCenter;
-
-        Vector2 vector = new Vector2(dx, dy);
-        if(vector.len() > radius) return new Vector2();
-
-        vector.scl(1.f / radius);
-        return vector;
     }
 }
