@@ -25,6 +25,7 @@ public class GameScreen implements Screen {
     private ShootButtonActor button;
 
     private TrumpActor trump;
+    private BackgroundActor bg;
 
     public GameScreen(App app) {
         this.app = app;
@@ -42,9 +43,13 @@ public class GameScreen implements Screen {
         trump = new TrumpActor(projectileFactory, app);
         obstacleFactory = new ObstacleFactory(obstaclePool, projectileFactory, trump);
         spawner = new Spawner(obstacleFactory);
+
         joystick = new Joystick(trump);
         button = new ShootButtonActor(projectileFactory, trump);
 
+        bg = new BackgroundActor();
+
+        stage.addActor(bg);
         stage.addActor(trump);
         stage.addActor(joystick);
         stage.addActor(button);

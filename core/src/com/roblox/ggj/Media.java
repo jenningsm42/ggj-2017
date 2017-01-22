@@ -18,7 +18,12 @@ public class Media extends Obstacle {
 
     public Media(float speed, ProjectileFactory projectileFactory, TrumpActor trump){
         super(speed, projectileFactory, trump);
-        frames.add(new Texture("media.png"));
+
+        frames.add(new Texture("Media1.png"));
+        frames.add(new Texture("Media2.png"));
+        frames.add(new Texture("Media1.png"));
+        frames.add(new Texture("Media3.png"));
+
         sprite = App.createScaledSprite(frames.get(0));
         type = ObstacleType.MEDIA;
         projectileType = ProjectileType.NEWSPAPER;
