@@ -35,6 +35,7 @@ public class TrumpActor extends Actor {
     private float moneyRate = 0.005f;
     private float moneyGainDelay = 3.f; // When hit by an audit notice
     private float moneyGainTime = moneyGainDelay;
+    private final int moneyThrown = 30000;
 
     TrumpActor(ProjectileFactory projectileFactory, App app) {
         frames = new ArrayList<Texture>();
@@ -94,9 +95,9 @@ public class TrumpActor extends Actor {
     }
 
     public void requestMoneyThrow() {
-        if(money >= 50000 && moneyTime >= moneyDelay) {
+        if(money >= moneyThrown && moneyTime >= moneyDelay) {
             moneyTime = 0.f;
-            money -= 50000;
+            money -= moneyThrown;
             projectileFactory.createProjectile(null, this, ProjectileType.MONEY);
         }
     }
