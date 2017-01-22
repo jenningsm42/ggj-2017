@@ -14,12 +14,14 @@ import java.util.List;
  */
 
 public class ProjectilePool {
+    private ObstaclePool obstaclePool;
     private List<ProjectileActor> projectiles;
     private Stage stage;
     private Rectangle screen;
 
-    public ProjectilePool(Stage stage) {
+    public ProjectilePool(Stage stage, ObstaclePool obstaclePool){
         this.stage = stage;
+        this.obstaclePool = obstaclePool;
         projectiles = new ArrayList<ProjectileActor>();
         screen = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
@@ -27,6 +29,11 @@ public class ProjectilePool {
     public void addProjectile(ProjectileActor projectile) {
         projectiles.add(projectile);
         stage.addActor(projectile);
+    }
+
+    public void removeProjectile(ProjectileActor projectile){
+        projectiles.remove(projectile);
+        projectile.remove();
     }
 
     public void detectCollisions(TrumpActor trump){
@@ -44,6 +51,8 @@ public class ProjectilePool {
                     case SLUR:
                         slurCollision(trump);
                         break;
+                    case MONEY:
+
                 }
 
                 if(proj.getType() != ProjectileType.MONEY) {

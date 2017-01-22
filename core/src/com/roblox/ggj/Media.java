@@ -18,6 +18,7 @@ public class Media extends Obstacle {
 
         setWidth(sprite.getWidth());
         setHeight(sprite.getHeight());
+        lives = 5;
     }
 
     @Override
@@ -25,6 +26,13 @@ public class Media extends Obstacle {
         super.act(delta);
         sprite.translate(velocity.x * delta, velocity.y * delta);
         setCoordinateFields();
+    }
+
+    public void damage(){
+        if(lives == 1)
+            kill();
+        else
+            lives--;
     }
 
     public void kill() {

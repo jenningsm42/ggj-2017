@@ -22,6 +22,7 @@ public class Activist extends Obstacle {
 
         setWidth(sprite.getWidth());
         setHeight(sprite.getHeight());
+        this.lives = 1;
     }
 
     @Override
@@ -29,6 +30,10 @@ public class Activist extends Obstacle {
         super.act(delta);
         sprite.translate(velocity.x * delta, velocity.y * delta);
         setCoordinateFields();
+    }
+
+    public void damage(){
+        kill();
     }
 
     public void kill() {
@@ -39,4 +44,6 @@ public class Activist extends Obstacle {
     public void attack(){
 
     }
+
+
 }

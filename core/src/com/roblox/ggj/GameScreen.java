@@ -34,17 +34,13 @@ public class GameScreen implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        projectilePool = new ProjectilePool(stage);
+        obstaclePool = new ObstaclePool(stage, projectilePool);
+        projectilePool = new ProjectilePool(stage, obstaclePool);
         projectileFactory = new ProjectileFactory(projectilePool);
-
         trump = new TrumpActor(projectileFactory);
-
-        obstaclePool = new ObstaclePool(stage);
         obstacleFactory = new ObstacleFactory(obstaclePool, projectileFactory, trump);
         spawner = new Spawner(obstacleFactory);
-
         joystick = new Joystick(trump);
-
         stage.addActor(trump);
         stage.addActor(joystick);
     }

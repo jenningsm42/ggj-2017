@@ -28,6 +28,8 @@ public abstract class Obstacle extends Actor {
     protected Vector2 velocity;
     protected ObstacleType type;
     protected ProjectileType projectileType;
+    protected int lives;
+
     private ProjectileFactory projectileFactory;
     private TrumpActor trump;
 
@@ -63,6 +65,8 @@ public abstract class Obstacle extends Actor {
 
     public abstract void kill();
 
+    public abstract void damage();
+
     public boolean hasCollision(TrumpActor trump){
         return sprite.getBoundingRectangle().overlaps(trump.getSprite().getBoundingRectangle());
     }
@@ -79,4 +83,5 @@ public abstract class Obstacle extends Actor {
         setX(sprite.getX() + sprite.getWidth() / 2.f);
         setY(sprite.getY() + sprite.getHeight() / 2.f);
     }
+
 }
