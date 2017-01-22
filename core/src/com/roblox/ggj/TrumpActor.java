@@ -27,12 +27,15 @@ public class TrumpActor extends Actor {
     private final float animationDelay = 0.2f;
     private ProjectileFactory projectileFactory;
     private App app;
+    private float leftBound;
+    private float rightBound;
 
     private int money = 1000000;
     private int votes = 1000000;
     private float moneyRate = 0.005f;
-    private float moneyGainTime = 5.f;
-    private float moneyGainDelay = 5.f; // When hit by an audit notice
+    private float moneyGainDelay = 3.f; // When hit by an audit notice
+    private float moneyGainTime = moneyGainDelay;
+    private final int moneyThrown = 30000;
 
     TrumpActor(ProjectileFactory projectileFactory, App app) {
         frames = new ArrayList<Texture>();
@@ -54,6 +57,9 @@ public class TrumpActor extends Actor {
 
         this.projectileFactory = projectileFactory;
         this.app = app;
+
+        leftBound = 15.f * App.getPPU();
+        rightBound = (Gdx.graphics.getWidth() / App.getPPU() - 15.f) * App.getPPU();
     }
 
     public Sprite getSprite(){
@@ -89,9 +95,9 @@ public class TrumpActor extends Actor {
     }
 
     public void requestMoneyThrow() {
-        if(money >= 50000 && moneyTime >= moneyDelay) {
+        if(money >= moneyThrown && moneyTime >= moneyDelay) {
             moneyTime = 0.f;
-            money -= 20000;
+            money -= moneyThrown;
             projectileFactory.createProjectile(null, this, ProjectileType.MONEY);
         }
     }
@@ -109,10 +115,10 @@ public class TrumpActor extends Actor {
         sprite.translate(velocity.x * delta, velocity.y * delta);
 
         // Ensure Trump doesn't go out of bounds
-        if(sprite.getX() < 0.f)
-            sprite.setX(0.f);
-        if(sprite.getX() + sprite.getWidth() > Gdx.graphics.getWidth())
-            sprite.setX(Gdx.graphics.getWidth() - sprite.getWidth());
+        if(sprite.getX() < leftBound)
+            sprite.setX(leftBound);
+        if(sprite.getX() + sprite.getWidth() > rightBound)
+            sprite.setX(rightBound - sprite.getWidth());
         if(sprite.getY() < 0.f)
             sprite.setY(0.f);
         if(sprite.getY() + sprite.getHeight() > Gdx.graphics.getHeight())

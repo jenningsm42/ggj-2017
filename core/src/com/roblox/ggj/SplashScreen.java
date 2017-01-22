@@ -20,6 +20,7 @@ public class SplashScreen implements Screen {
     private Stage stage;
     private Sound millionDollars;
     private boolean soundPlayed = false;
+    private float time = 0.f;
 
     private class SplashActor extends Actor {
         private Sprite splash;
@@ -49,13 +50,6 @@ public class SplashScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         stage.addActor(new SplashActor());
-
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                app.setScreen(new GameScreen(app));
-            }
-        }, 1.5f);
     }
 
     @Override
@@ -68,6 +62,9 @@ public class SplashScreen implements Screen {
 
         while(!soundPlayed)
             soundPlayed = (millionDollars.play(1.f) != -1);
+
+        time += delta;
+        if(time >= 1.5f) app.setScreen(new GameScreen(app));
     }
 
     @Override

@@ -74,15 +74,16 @@ public class ProjectilePool {
         while(iterator.hasNext()){
             ProjectileActor proj = iterator.next();
             if(proj.getType() != ProjectileType.MONEY && proj.hasCollision(trump)){
+                int voteDamageRate = (trump.getMoney() < 100000? 4 : 1);
                 switch(proj.getType()){
                     case AUDIT_NOTICE:
                         auditCollision(trump);
                         break;
                     case NEWSPAPER:
-                        newspaperCollision(trump);
+                        newspaperCollision(trump, voteDamageRate);
                         break;
                     case SLUR:
-                        slurCollision(trump);
+                        slurCollision(trump, voteDamageRate);
                         break;
                 }
 
@@ -106,12 +107,16 @@ public class ProjectilePool {
     }
 
     private void newspaperCollision(TrumpActor trump){
-        rigged.play(1.0f);
         trump.addVotes(-250000);
     }
 
-    private void slurCollision(TrumpActor trump) {
+    private void newspaperCollision(TrumpActor trump, int rate){
         rigged.play(1.0f);
-        trump.addVotes(-150000);
+        trump.addVotes(-250000 * rate);
+    }
+
+    private void slurCollision(TrumpActor trump, int rate) {
+        trump.addVotes(-150000 * rate);
+        rigged.play(1.0f);
     }
 }
