@@ -1,6 +1,7 @@
 package com.roblox.ggj;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,6 +19,7 @@ public class ProjectilePool {
     private List<ProjectileActor> projectiles;
     private Stage stage;
     private Rectangle screen;
+    private Sound rigged;
 
     public ProjectilePool(Stage stage, ObstaclePool obstaclePool){
         this.stage = stage;
@@ -25,6 +27,8 @@ public class ProjectilePool {
         projectiles = new ArrayList<ProjectileActor>();
         screen = new Rectangle(-50.f * App.getPPU(), 0,
             Gdx.graphics.getWidth() + 50.f * App.getPPU(), Gdx.graphics.getHeight());
+        rigged = Gdx.audio.newSound(Gdx.files.internal("rigged.wav"));
+
     }
 
     public void addProjectile(ProjectileActor projectile) {
@@ -97,14 +101,17 @@ public class ProjectilePool {
 
     private void auditCollision(TrumpActor trump){
         trump.addMoney(-100000);
+        rigged.play(1.0f);
         trump.resetMoneyGainTimer();
     }
 
     private void newspaperCollision(TrumpActor trump){
+        rigged.play(1.0f);
         trump.addVotes(-250000);
     }
 
     private void slurCollision(TrumpActor trump) {
+        rigged.play(1.0f);
         trump.addVotes(-150000);
     }
 }
