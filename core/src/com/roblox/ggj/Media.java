@@ -9,12 +9,12 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Media extends Obstacle {
 
-    public Media(float speed){
-        super(speed);
-        fireRate = 1.5f;
+    public Media(float speed, ProjectileFactory projectileFactory, TrumpActor trump){
+        super(speed, projectileFactory, trump);
         frames.add(new Texture("media.png"));
         sprite = App.createScaledSprite(frames.get(0));
         type = ObstacleType.MEDIA;
+        projectileType = ProjectileType.NEWSPAPER;
 
         setWidth(sprite.getWidth());
         setHeight(sprite.getHeight());
@@ -29,7 +29,7 @@ public class Media extends Obstacle {
 
     public void kill() {
         //TODO: play distruction animation
-        clear();
+        remove();
     }
 
     public void attack(){

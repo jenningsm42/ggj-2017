@@ -35,6 +35,9 @@ public class ProjectileActor extends Actor {
             case AUDIT_NOTICE:
                 frames.add(new Texture("proj_audit_notice.png"));
                 break;
+            case SLUR:
+                frames.add(new Texture("proj_slur.png"));
+                break;
             case MONEY:
             default:
                 frames.add(new Texture("Money_Shot1.png"));
