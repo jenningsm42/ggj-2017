@@ -86,7 +86,7 @@ public class ProjectileActor extends Actor {
 
     public void slurBehavior(float delta) {
         time += delta;
-        accelX = -230.f * (float)Math.cos(4.f * time);
+        accelX = -230.f * App.getPPU() * (float)Math.cos(4.f * time);
         velocity.x += accelX * delta;
         velocity.setLength(ProjectileFactory.projectileSpeed);
     }
