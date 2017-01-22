@@ -14,14 +14,12 @@ import java.util.List;
  */
 
 public class ObstaclePool {
-    private ProjectilePool projPool;
     private List<Obstacle> obstacles;
     private Stage stage;
     private Rectangle screen;
 
-    public ObstaclePool(Stage stage, ProjectilePool projPool){
+    public ObstaclePool(Stage stage){
         this.stage = stage;
-        this.projPool = projPool;
         obstacles = new ArrayList<Obstacle>();
         screen = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight() + 1);
     }
@@ -31,17 +29,8 @@ public class ObstaclePool {
         stage.addActor(obstacle);
     }
 
-    public void trumpStrikesAgain(ProjectileActor proj){
-        Iterator<Obstacle> iterator = obstacles.iterator();
-        while(iterator.hasNext()){
-            Obstacle obstacle = iterator.next();
-            if(proj.getSprite().getBoundingRectangle().overlaps(
-                    obstacle.getSprite().getBoundingRectangle())){
-                obstacle.damage();
-                projPool.removeProjectile(proj);
-                continue;
-            }
-        }
+    public List<Obstacle> getObstacles(){
+        return obstacles;
     }
 
     public void detectCollisions(TrumpActor trump){

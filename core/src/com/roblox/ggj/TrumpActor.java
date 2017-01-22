@@ -97,7 +97,7 @@ public class TrumpActor extends Actor {
         }
 
         sprite.translate(velocity.x * delta, velocity.y * delta);
-        
+
         // Ensure Trump doesn't go out of bounds
         if(sprite.getX() < 0.f)
             sprite.setX(0.f);

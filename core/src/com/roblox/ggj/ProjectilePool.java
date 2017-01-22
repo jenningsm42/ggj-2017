@@ -36,6 +36,21 @@ public class ProjectilePool {
         projectile.remove();
     }
 
+    public void trumpStrikesAgain(){
+        Iterator<ProjectileActor> iterator = projectiles.iterator();
+        while(iterator.hasNext()){
+            ProjectileActor proj = iterator.next();
+            for(Obstacle obstacle: obstaclePool.getObstacles()){
+                if(proj.getSprite().getBoundingRectangle().overlaps(
+                        obstacle.getSprite().getBoundingRectangle())) {
+                    obstacle.damage();
+                    removeProjectile(proj);
+                    continue;
+                }
+            }
+        }
+    }
+
     public void detectCollisions(TrumpActor trump){
         Iterator<ProjectileActor> iterator = projectiles.iterator();
         while(iterator.hasNext()){
@@ -51,8 +66,6 @@ public class ProjectilePool {
                     case SLUR:
                         slurCollision(trump);
                         break;
-                    case MONEY:
-
                 }
 
                 if(proj.getType() != ProjectileType.MONEY) {
@@ -67,6 +80,7 @@ public class ProjectilePool {
                 proj.remove();
             }
         }
+        trumpStrikesAgain();
     }
 
     private void auditCollision(TrumpActor trump){

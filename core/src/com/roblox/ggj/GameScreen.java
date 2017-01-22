@@ -22,6 +22,7 @@ public class GameScreen implements Screen {
     private ObstacleFactory obstacleFactory;
     private Spawner spawner;
     private Joystick joystick;
+    private ShootButtonActor button;
 
     private TrumpActor trump;
 
@@ -34,15 +35,19 @@ public class GameScreen implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        obstaclePool = new ObstaclePool(stage, projectilePool);
+        obstaclePool = new ObstaclePool(stage);
         projectilePool = new ProjectilePool(stage, obstaclePool);
+
         projectileFactory = new ProjectileFactory(projectilePool);
         trump = new TrumpActor(projectileFactory);
         obstacleFactory = new ObstacleFactory(obstaclePool, projectileFactory, trump);
         spawner = new Spawner(obstacleFactory);
         joystick = new Joystick(trump);
+        button = new ShootButtonActor(projectileFactory, trump);
+
         stage.addActor(trump);
         stage.addActor(joystick);
+        stage.addActor(button);
     }
 
     @Override
