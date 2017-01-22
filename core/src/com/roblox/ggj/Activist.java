@@ -1,6 +1,7 @@
 package com.roblox.ggj;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -11,6 +12,7 @@ public class Activist extends Obstacle {
     private float accelerationX;
     private float time;
     private float amplitude;
+    private Sound patriarchy;
 
     public Activist(float speed, ProjectileFactory projectileFactory, TrumpActor trump) {
         super(speed, projectileFactory, trump);
@@ -29,6 +31,8 @@ public class Activist extends Obstacle {
         accelerationX = 0.f;
         time = 0.f;
         amplitude = 120.f * App.getPPU();
+
+        patriarchy = Gdx.audio.newSound(Gdx.files.internal("patriarchy.wav"));
     }
 
     @Override
@@ -45,6 +49,7 @@ public class Activist extends Obstacle {
 
     public void kill() {
         //TODO: play distruction animation
+        patriarchy.play(1.0f);
         remove();
     }
 

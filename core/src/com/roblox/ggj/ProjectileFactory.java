@@ -1,7 +1,11 @@
 package com.roblox.ggj;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import java.util.Random;
 
 /**
  * Created by KaseiFox on 1/21/17.
@@ -9,10 +13,26 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ProjectileFactory {
     private ProjectilePool projectilePool;
+    private Sound paperThrow;
+    private Sound whiteMale;
+    private Sound malePrivelage;
+    private Sound moneyThrow;
+    private Random rand;
+    private int minSound = 0;
+    private int maxSound = 1;
+
     public final static float projectileSpeed = 50.f * App.getPPU();
+
 
     public ProjectileFactory(ProjectilePool projectilePool) {
         this.projectilePool = projectilePool;
+        rand = new Random();
+
+        paperThrow = Gdx.audio.newSound(Gdx.files.internal("newspaper.wav"));
+        whiteMale = Gdx.audio.newSound(Gdx.files.internal("whitemale.wav"));
+        malePrivelage = Gdx.audio.newSound(Gdx.files.internal("male_privelage.wav"));
+        moneyThrow = Gdx.audio.newSound(Gdx.files.internal("kaching.wav"));
+
     }
 
     public void createProjectile(Obstacle obstacle, TrumpActor trump, ProjectileType type) {
@@ -25,9 +45,14 @@ public class ProjectileFactory {
                 Vector2 origin = new Vector2(trump.getX(), trump.getY());
 
                 ProjectileActor projectile = new ProjectileActor(origin, velocity, type);
+                moneyThrow.play(1.0f);
                 projectilePool.addProjectile(projectile);
             } break;
             case SLUR: {
+                int randomNum = rand.nextInt((maxSound - minSound) + 1) + minSound;
+                if (randomNum == 0)
+                    malePrivelage.play(1.0f);
+                else whiteMale.play(1.0f);
                 // From activist, throw towards trump
                 Vector2 velocity = new Vector2(
                         trump.getX() - obstacle.getX(),
@@ -50,6 +75,7 @@ public class ProjectileFactory {
                 velocities[2] = new Vector2(3, -4);
                 velocities[2].setLength(projectileSpeed);
 
+                paperThrow.play(1.0f);
                 for(int i = 0; i < 3; i++)
                     projectilePool.addProjectile(new ProjectileActor(origin, velocities[i], type));
 

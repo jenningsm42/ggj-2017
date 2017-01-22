@@ -1,6 +1,7 @@
 package com.roblox.ggj;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -13,6 +14,7 @@ import java.util.Random;
 public class Media extends Obstacle {
     private Vector2 target;
     private Random random;
+    private Sound fakeNews;
 
     public Media(float speed, ProjectileFactory projectileFactory, TrumpActor trump){
         super(speed, projectileFactory, trump);
@@ -27,6 +29,9 @@ public class Media extends Obstacle {
         target = new Vector2(Gdx.graphics.getWidth() / 2.f, 75.f * App.getPPU());
         random = new Random();
         lives = 2;
+
+        fakeNews = Gdx.audio.newSound(Gdx.files.internal("fake_news.wav"));
+
     }
 
     @Override
@@ -52,6 +57,7 @@ public class Media extends Obstacle {
 
     public void kill() {
         //TODO: play distruction animation
+        fakeNews.play(1.0f);
         remove();
     }
 
