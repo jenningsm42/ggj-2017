@@ -31,21 +31,21 @@ public class ProjectilePool {
         stage.addActor(projectile);
     }
 
-    public void removeProjectile(ProjectileActor projectile){
-        projectiles.remove(projectile);
-        projectile.remove();
-    }
-
     public void trumpStrikesAgain(){
         Iterator<ProjectileActor> iterator = projectiles.iterator();
         while(iterator.hasNext()){
             ProjectileActor proj = iterator.next();
-            for(Obstacle obstacle: obstaclePool.getObstacles()){
+            if(proj.getType() != ProjectileType.MONEY) continue;
+
+            Iterator<Obstacle> obstacleIterator = obstaclePool.getObstacles().iterator();
+            while(obstacleIterator.hasNext()) {
+                Obstacle obstacle = obstacleIterator.next();
                 if(proj.getSprite().getBoundingRectangle().overlaps(
                         obstacle.getSprite().getBoundingRectangle())) {
                     obstacle.damage();
-                    removeProjectile(proj);
-                    continue;
+                    proj.remove();
+                    iterator.remove();
+                    break;
                 }
             }
         }

@@ -18,6 +18,7 @@ public class Joystick extends Actor {
     private float yCenter;
     private float radius;
     private TrumpActor trump;
+    private int pointer = -1;
 
 
     public Joystick(TrumpActor trump){
@@ -36,14 +37,41 @@ public class Joystick extends Actor {
 
     @Override
     public void act(float delta){
-        Vector2 vector;
-        if(Gdx.input.isTouched()){
-            float xInput = Gdx.input.getX();
-            float yInput = Gdx.graphics.getHeight() - Gdx.input.getY();
-            vector = getVector(xInput, yInput);
-        }
-        else vector = new Vector2();
+        Vector2 vector = new Vector2();
+        if(pointer != -1 && Gdx.input.isTouched(pointer)) {
+            float x = Gdx.input.getX(pointer);
+            float y = Gdx.graphics.getHeight() - Gdx.input.getY(pointer);
 
+            float dx = x - xCenter;
+            float dy = y - yCenter;
+
+            vector.set(dx, dy);
+            if(vector.len2() > radius * radius) vector.setLength2(radius * radius);
+
+            vector.scl(1.f / radius);
+            trump.setVelocity(vector);
+            return;
+        } else if(pointer != -1) pointer = -1;
+
+        for(int i = 0; i < 5; i++) {
+            if(Gdx.input.isTouched(i)) {
+                float x = Gdx.input.getX(i);
+                float y = Gdx.graphics.getHeight() - Gdx.input.getY(i);
+
+                float dx = x - xCenter;
+                float dy = y - yCenter;
+
+                vector.set(dx, dy);
+                if(vector.len2() > radius * radius) continue;
+
+                pointer = i;
+                vector.scl(1.f / radius);
+                trump.setVelocity(vector);
+                return;
+            }
+        }
+
+        vector.setZero();
         trump.setVelocity(vector);
     }
 

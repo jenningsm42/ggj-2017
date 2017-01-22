@@ -19,6 +19,7 @@ public class ShootButtonActor extends Actor {
     private float xCenter;
     private float yCenter;
     private float radius;
+    private int pointer = -1;
 
     public ShootButtonActor(ProjectileFactory factory, TrumpActor trump){
         buttonTexture = new Texture("Joystick_Fire.png");
@@ -35,14 +36,18 @@ public class ShootButtonActor extends Actor {
 
     @Override
     public void act(float delta) {
-        if(Gdx.input.isTouched()){
-            float xInput = Gdx.input.getX();
-            float yInput = Gdx.graphics.getHeight() - Gdx.input.getY();
-            float dx = xInput - xCenter;
-            float dy = yInput - yCenter;
+        for(int i = 0; i < 5; i++) {
+            if (Gdx.input.isTouched(i)) {
+                float xInput = Gdx.input.getX(i);
+                float yInput = Gdx.graphics.getHeight() - Gdx.input.getY(i);
+                float dx = xInput - xCenter;
+                float dy = yInput - yCenter;
 
-            if(Math.sqrt((double)(dx*dx + dy*dy)) < radius)
-                trump.requestMoneyThrow();
+                if (dx * dx + dy * dy < radius * radius) {
+                    trump.requestMoneyThrow();
+                    return;
+                }
+            }
         }
     }
 
