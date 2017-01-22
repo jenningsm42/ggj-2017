@@ -2,6 +2,7 @@ package com.roblox.ggj;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -17,13 +18,17 @@ import com.badlogic.gdx.utils.Timer;
 public class SplashScreen implements Screen {
     private App app;
     private Stage stage;
+    private Sound millionDollars;
+
 
     private class SplashActor extends Actor {
         private Sprite splash;
 
+
         public SplashActor() {
             splash = App.createScaledSprite(new Texture("splash.png"));
             splash.setPosition((Gdx.graphics.getWidth() - splash.getWidth()) / 2.f, (Gdx.graphics.getHeight() - splash.getHeight()) / 2.f);
+
         }
 
         @Override
@@ -34,6 +39,9 @@ public class SplashScreen implements Screen {
 
     public SplashScreen(App app) {
         this.app = app;
+        millionDollars = Gdx.audio.newSound(Gdx.files.internal("million_dollars.wav"));
+        millionDollars.play(1.0f);
+
     }
 
     @Override
