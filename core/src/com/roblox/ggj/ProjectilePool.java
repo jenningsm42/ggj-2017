@@ -45,7 +45,17 @@ public class ProjectilePool {
                         obstacle.getSprite().getBoundingRectangle())) {
                     if(obstacle.damage()) {
                         obstacleIterator.remove();
-                        trump.addVotes(500000);
+                        switch(obstacle.getType()) {
+                            case ACTIVIST:
+                                trump.addVotes(50000);
+                                break;
+                            case MEDIA:
+                                trump.addVotes(400000);
+                                break;
+                            case AUDITOR:
+                                trump.addVotes(100000);
+                                break;
+                        }
                     }
                     proj.remove();
                     iterator.remove();
