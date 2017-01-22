@@ -25,6 +25,7 @@ public abstract class Obstacle extends Actor {
     protected float speed;
     protected Vector2 velocity;
     protected ObstacleType type;
+    protected float fireRate;
 
     public Obstacle(float speed) {
         this.speed = speed;

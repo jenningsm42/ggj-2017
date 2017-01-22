@@ -11,7 +11,7 @@ public class Auditor extends Obstacle {
 
     public Auditor(float speed){
         super(speed);
-
+        super.fireRate = 1.0f;
         frames.add(new Texture("Auditor_1.png"));
         frames.add(new Texture("Auditor_2.png"));
         frames.add(new Texture("Auditor_3.png"));

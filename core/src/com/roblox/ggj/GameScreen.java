@@ -23,6 +23,7 @@ public class GameScreen implements Screen {
     private Spawner spawner;
 
     private TrumpActor trump;
+    
 
     public GameScreen(App app) {
         this.app = app;
