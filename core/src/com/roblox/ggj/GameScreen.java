@@ -39,7 +39,7 @@ public class GameScreen implements Screen {
         projectilePool = new ProjectilePool(stage, obstaclePool);
 
         projectileFactory = new ProjectileFactory(projectilePool);
-        trump = new TrumpActor(projectileFactory);
+        trump = new TrumpActor(projectileFactory, app);
         obstacleFactory = new ObstacleFactory(obstaclePool, projectileFactory, trump);
         spawner = new Spawner(obstacleFactory);
         joystick = new Joystick(trump);
@@ -73,7 +73,7 @@ public class GameScreen implements Screen {
             Gdx.graphics.getHeight() - 1.f * App.getPPU());
         app.getFont().draw(stage.getBatch(), votesStr,
             1.f * App.getPPU(),
-            Gdx.graphics.getHeight() - (1.f * App.getPPU() + 18 * Math.round(App.scaleRatio)));
+            Gdx.graphics.getHeight() - (1.f * App.getPPU() + 18 * Math.round(App.getScaleRatio())));
         stage.getBatch().end();
     }
 

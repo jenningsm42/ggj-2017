@@ -26,12 +26,13 @@ public class TrumpActor extends Actor {
     private int animationFrame = 0;
     private final float animationDelay = 0.2f;
     private ProjectileFactory projectileFactory;
+    private App app;
 
     private int money = 1000000;
     private int votes = 1000000;
     private float moneyRate = 0.005f;
 
-    TrumpActor(ProjectileFactory projectileFactory) {
+    TrumpActor(ProjectileFactory projectileFactory, App app) {
         frames = new ArrayList<Texture>();
         frames.add(new Texture("Trump_up1.png"));
         frames.add(new Texture("Trump_up2.png"));
@@ -50,6 +51,7 @@ public class TrumpActor extends Actor {
         setHeight(sprite.getHeight());
 
         this.projectileFactory = projectileFactory;
+        this.app = app;
     }
 
     public Sprite getSprite(){
@@ -63,7 +65,9 @@ public class TrumpActor extends Actor {
 
     public void addVotes(int amount) {
         votes += amount;
-        if(votes < 0) votes = 0;
+        if(votes <= 0) {
+            app.setScreen(new GameScreen(app));
+        }
     }
 
     public int getMoney() {

@@ -30,7 +30,9 @@ public class ProjectileActor extends Actor {
 
         switch(type) {
             case NEWSPAPER:
-                frames.add(new Texture("proj_newspaper.png"));
+                frames.add(new Texture("News1.png"));
+                frames.add(new Texture("News2.png"));
+                frames.add(new Texture("News3.png"));
                 break;
             case AUDIT_NOTICE:
                 frames.add(new Texture("proj_audit_notice.png"));
@@ -62,8 +64,6 @@ public class ProjectileActor extends Actor {
     }
 
     public ProjectileType getType(){ return type; }
-
-    public void update(float delta) { }
 
     @Override
     public void act(float delta) {

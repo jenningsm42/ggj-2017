@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ProjectileFactory {
     private ProjectilePool projectilePool;
-    private final float projectileSpeed = 100.f * App.getPPU();
+    private final float projectileSpeed = 50.f * App.getPPU();
 
     public ProjectileFactory(ProjectilePool projectilePool) {
         this.projectilePool = projectilePool;

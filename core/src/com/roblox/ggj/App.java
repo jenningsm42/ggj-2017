@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class App extends com.badlogic.gdx.Game {
-	public static final float scaleRatio = 4.f;
 	private BitmapFont font;
 
 	@Override
@@ -16,7 +15,7 @@ public class App extends com.badlogic.gdx.Game {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("munro.ttf"));
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-		parameter.size = 18 * Math.round(scaleRatio);
+		parameter.size = 18 * Math.round(getScaleRatio());
 		font = generator.generateFont(parameter);
 		font.setColor(Color.BLACK);
 
@@ -29,12 +28,16 @@ public class App extends com.badlogic.gdx.Game {
 
 	public static Sprite createScaledSprite(Texture texture) {
 		Sprite sprite = new Sprite(texture);
-		sprite.setSize(sprite.getWidth() * scaleRatio,
-				sprite.getHeight() * scaleRatio);
+		sprite.setSize(sprite.getWidth() * getScaleRatio(),
+				sprite.getHeight() * getScaleRatio());
 		return sprite;
 	}
 
 	public static float getPPU() {
 		return Gdx.graphics.getHeight() / 100.f;
+	}
+
+	public static float getScaleRatio() {
+		return Gdx.graphics.getHeight() / 480.f; // Scale by 4x on 1080p screen
 	}
 }
