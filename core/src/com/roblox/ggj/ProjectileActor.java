@@ -16,7 +16,7 @@ import java.util.List;
 public class ProjectileActor extends Actor {
     private List<Texture> frames;
     private Sprite sprite;
-    private float animationDelay = 0.3f;
+    private float animationDelay = 0.1f;
     private float animationTime = 0.f;
     private int animationFrame = 0;
     private Vector2 velocity;

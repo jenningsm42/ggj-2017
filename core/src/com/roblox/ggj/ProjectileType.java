@@ -7,5 +7,6 @@ package com.roblox.ggj;
 public enum ProjectileType {
     MONEY,
     NEWSPAPER,
-    AUDIT_NOTICE
+    AUDIT_NOTICE,
+    SLUR
 }

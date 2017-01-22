@@ -16,24 +16,49 @@ public class ProjectileFactory {
     }
 
     public void createProjectile(Obstacle obstacle, TrumpActor trump, ProjectileType type) {
-        Vector2 velocity, origin;
-        if(type == ProjectileType.MONEY) {
-            // From Trump, velocity is straight up
-            assert(obstacle == null);
+        switch(type) {
+            case MONEY: {
+                // From Trump, velocity is straight up
+                assert (obstacle == null);
 
-            velocity = new Vector2(0, projectileSpeed);
-            origin = new Vector2(trump.getX(), trump.getY());
-        } else {
-            // From obstacle, velocity is towards trump
-            velocity = new Vector2(
-                    trump.getX() - obstacle.getX(),
-                    trump.getY() - obstacle.getY()
-            );
-            velocity.setLength(projectileSpeed);
-            origin = new Vector2(obstacle.getX(), obstacle.getY());
+                Vector2 velocity = new Vector2(0, projectileSpeed);
+                Vector2 origin = new Vector2(trump.getX(), trump.getY());
+
+                ProjectileActor projectile = new ProjectileActor(origin, velocity, type);
+                projectilePool.addProjectile(projectile);
+            } break;
+            case AUDIT_NOTICE: {
+                // From auditor, home in on Trump
+                Vector2 velocity = new Vector2(
+                        trump.getX() - obstacle.getX(),
+                        trump.getY() - obstacle.getY()
+                );
+                velocity.setLength(projectileSpeed);
+                Vector2 origin = new Vector2(obstacle.getX(), obstacle.getY());
+
+                ProjectileActor projectile = new ProjectileActor(origin, velocity, type);
+                projectilePool.addProjectile(projectile);
+            } break;
+            case NEWSPAPER: {
+                // From media, split up into 3 projectiles in a cone
+                Vector2 origin = new Vector2(obstacle.getX(), obstacle.getY());
+
+                Vector2 velocities[] = new Vector2[3];
+                velocities[0] = new Vector2(0, -projectileSpeed);
+                velocities[1] = new Vector2(-3, -4); // From 3-4-5 triangle -- 30 degrees
+                velocities[1].setLength(projectileSpeed);
+                velocities[2] = new Vector2(3, -4);
+                velocities[2].setLength(projectileSpeed);
+
+                for(int i = 0; i < 3; i++)
+                    projectilePool.addProjectile(new ProjectileActor(origin, velocities[i], type));
+
+            } break;
+            case SLUR: {
+                // From feminists, slur will move in a wave (velocity doesn't matter)
+                Vector2 origin = new Vector2(obstacle.getX(), obstacle.getY());
+                projectilePool.addProjectile(new ProjectileActor(origin, new Vector2(), type));
+            } break;
         }
-
-        ProjectileActor projectile = new ProjectileActor(origin, velocity, type);
-        projectilePool.addProjectile(projectile);
     }
 }
