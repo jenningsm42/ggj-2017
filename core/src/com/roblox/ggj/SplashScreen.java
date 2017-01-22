@@ -19,7 +19,7 @@ public class SplashScreen implements Screen {
     private App app;
     private Stage stage;
     private Sound millionDollars;
-
+    private boolean soundPlayed = false;
 
     private class SplashActor extends Actor {
         private Sprite splash;
@@ -40,7 +40,6 @@ public class SplashScreen implements Screen {
     public SplashScreen(App app) {
         this.app = app;
         millionDollars = Gdx.audio.newSound(Gdx.files.internal("million_dollars.wav"));
-        millionDollars.play(1.0f);
 
     }
 
@@ -66,6 +65,9 @@ public class SplashScreen implements Screen {
 
         stage.act(delta);
         stage.draw();
+
+        while(!soundPlayed)
+            soundPlayed = (millionDollars.play(1.f) != -1);
     }
 
     @Override

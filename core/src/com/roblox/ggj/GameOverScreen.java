@@ -16,6 +16,7 @@ public class GameOverScreen implements Screen {
     private App app;
     private Stage stage;
     private Sound politicalBS;
+    private boolean soundPlayed = false;
 
     public GameOverScreen(App app) {
         this.app = app;
@@ -26,8 +27,6 @@ public class GameOverScreen implements Screen {
     public void show() {
         stage = new Stage();
         stage.addActor(new Actor());
-
-        politicalBS.play(1.f);
 
         Timer.schedule(new Timer.Task() {
             @Override
@@ -48,6 +47,9 @@ public class GameOverScreen implements Screen {
         stage.getBatch().begin();
         app.getFont().draw(stage.getBatch(), "You didn't become\npresident", 0, Gdx.graphics.getHeight());
         stage.getBatch().end();
+
+        while(!soundPlayed)
+            soundPlayed = (politicalBS.play(1.f) != -1);
     }
 
     @Override

@@ -47,6 +47,6 @@ public class Spawner {
         }
 
         time += delta;
-        spawnDelay = (float)(5.f * Math.exp(-Math.pow(rate * time, 4.f / 5.f)));
+        spawnDelay = (float)(5.f * Math.exp(-Math.pow(rate * time, 2.f / 5.f)));
     }
 }
