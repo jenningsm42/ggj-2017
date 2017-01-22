@@ -21,6 +21,7 @@ public class Auditor extends Obstacle {
 
         setWidth(sprite.getWidth());
         setHeight(sprite.getHeight());
+        lives = 2;
     }
 
     @Override
@@ -28,6 +29,13 @@ public class Auditor extends Obstacle {
         super.act(delta);
         sprite.translate(velocity.x * delta, velocity.y * delta);
         setCoordinateFields();
+    }
+
+    public void damage(){
+        if(lives == 1)
+            kill();
+        else
+            lives--;
     }
 
     public void kill() {

@@ -28,7 +28,8 @@ public class TrumpActor extends Actor {
     private ProjectileFactory projectileFactory;
 
     private int money = 1000000;
-    private int votes = 100000;
+    private int votes = 1000000;
+    private float moneyRate = 0.005f;
 
     TrumpActor(ProjectileFactory projectileFactory) {
         frames = new ArrayList<Texture>();
@@ -96,7 +97,7 @@ public class TrumpActor extends Actor {
         }
 
         sprite.translate(velocity.x * delta, velocity.y * delta);
-
+        
         // Ensure Trump doesn't go out of bounds
         if(sprite.getX() < 0.f)
             sprite.setX(0.f);
@@ -106,12 +107,12 @@ public class TrumpActor extends Actor {
             sprite.setY(0.f);
         if(sprite.getY() + sprite.getHeight() > Gdx.graphics.getHeight())
             sprite.setY(Gdx.graphics.getHeight() - sprite.getHeight());
-
         setX(sprite.getX() + sprite.getWidth() / 2.f);
         setY(sprite.getY() + sprite.getHeight() / 2.f);
 
         moneyTime += delta;
         animationTime += delta;
+        this.addMoney(Math.round(votes * moneyRate * delta));
     }
 
     @Override

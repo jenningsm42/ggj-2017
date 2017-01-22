@@ -26,6 +26,7 @@ public class Media extends Obstacle {
 
         target = new Vector2(Gdx.graphics.getWidth() / 2.f, 75.f * App.getPPU());
         random = new Random();
+        lives = 5;
     }
 
     @Override
@@ -48,6 +49,13 @@ public class Media extends Obstacle {
 
         sprite.translate(velocity.x * delta, velocity.y * delta);
         setCoordinateFields();
+    }
+
+    public void damage(){
+        if(lives == 1)
+            kill();
+        else
+            lives--;
     }
 
     public void kill() {
