@@ -21,6 +21,7 @@ public class GameScreen implements Screen {
     private ObstaclePool obstaclePool;
     private ObstacleFactory obstacleFactory;
     private Spawner spawner;
+    private Joystick joystick;
 
     private TrumpActor trump;
 
@@ -42,8 +43,10 @@ public class GameScreen implements Screen {
         obstacleFactory = new ObstacleFactory(obstaclePool, projectileFactory, trump);
         spawner = new Spawner(obstacleFactory);
 
+        joystick = new Joystick(trump);
 
         stage.addActor(trump);
+        stage.addActor(joystick);
     }
 
     @Override

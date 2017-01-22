@@ -12,7 +12,10 @@ public class Activist extends Obstacle {
     public Activist(float speed, ProjectileFactory projectileFactory, TrumpActor trump) {
         super(speed, projectileFactory, trump);
 
-        frames.add(new Texture("activist.png"));
+        frames.add(new Texture("Fem1.png"));
+        frames.add(new Texture("Fem2.png"));
+        frames.add(new Texture("Fem1.png"));
+        frames.add(new Texture("Fem3.png"));
         sprite = App.createScaledSprite(frames.get(0));
         type = ObstacleType.ACTIVIST;
         projectileType = ProjectileType.SLUR;

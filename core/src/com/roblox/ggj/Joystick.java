@@ -20,29 +20,32 @@ public class Joystick extends Actor {
     private TrumpActor trump;
 
 
-    public Joystick(){
-        texture = new Texture("joystick.png");
+    public Joystick(TrumpActor trump){
+        texture = new Texture("Joystick1.png");
         sprite = App.createScaledSprite(texture);
-        sprite.setX(10);
-        sprite.setY(10);
+        sprite.setX(1.f * App.getPPU());
+        sprite.setY(1.f * App.getPPU());
         double magnitudeSqrd = sprite.getWidth() * sprite.getWidth() +
                 sprite.getHeight() * sprite.getHeight();
         radius = Math.sqrt(magnitudeSqrd);
+
+        xCenter = sprite.getX() + sprite.getWidth() / 2.f;
+        yCenter = sprite.getY() + sprite.getHeight() / 2.f;
+
         this.trump = trump;
 
     }
 
     @Override
     public void act(float delta){
-        Vector2 vector = new Vector2();
+        Vector2 vector;
         if(Gdx.input.isTouched()){
             float xInput = Gdx.input.getX();
-            float yInput = Gdx.input.getY();
+            float yInput = Gdx.graphics.getHeight() - Gdx.input.getY();
             vector = getVector(xInput, yInput);
         }
-        else{
-            vector = new Vector2(0,0);
-        }
+        else vector = new Vector2();
+
         trump.setVelocity(vector);
     }
 
@@ -55,9 +58,10 @@ public class Joystick extends Actor {
         float dx = xInput - xCenter;
         float dy = yInput - yCenter;
 
-        double magnitude = Math.sqrt(dx*dx + dy*dy);
-        dx = dx / (float)magnitude;
-        dy = dy / (float)magnitude;
-        return new Vector2(dx,dy);
+        Vector2 vector = new Vector2(dx, dy);
+        if(vector.len() > radius) return new Vector2();
+
+        vector.setLength2(1.f);
+        return vector;
     }
 }

@@ -13,6 +13,7 @@ public class Auditor extends Obstacle {
         super(speed, projectileFactory, trump);
         frames.add(new Texture("Auditor_1.png"));
         frames.add(new Texture("Auditor_2.png"));
+        frames.add(new Texture("Auditor_1.png"));
         frames.add(new Texture("Auditor_3.png"));
         sprite = App.createScaledSprite(frames.get(0));
         type = ObstacleType.AUDITOR;
