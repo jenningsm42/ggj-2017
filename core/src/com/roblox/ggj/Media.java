@@ -11,7 +11,7 @@ public class Media extends Obstacle {
 
     public Media(float speed){
         super(speed);
-
+        fireRate = 1.5f;
         frames.add(new Texture("media.png"));
         sprite = App.createScaledSprite(frames.get(0));
         type = ObstacleType.MEDIA;

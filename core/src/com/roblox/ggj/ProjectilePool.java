@@ -39,11 +39,11 @@ public class ProjectilePool {
     }
 
     private void auditCollision(TrumpActor trump){
-        //do collision
+        trump.addMoney(-100000);
     }
 
     private void newspaperCollision(TrumpActor trump){
-        //do collision
+        trump.addVotes(-250000);
     }
 
 }

@@ -22,6 +22,7 @@ public class ProjectileActor extends Actor {
     private Vector2 velocity;
     private ProjectileType type;
 
+
     public ProjectileActor(Vector2 origin, Vector2 velocity, ProjectileType type) {
         this.velocity = velocity;
         this.type = type;
