@@ -38,7 +38,9 @@ public class ObstacleFactory {
                 return;
         }
 
-        float randX = rand.nextFloat() * Gdx.graphics.getWidth() - obstacle.getSprite().getWidth();
+        float randX = rand.nextFloat() * (Gdx.graphics.getWidth() - obstacle.getSprite().getWidth());
+        randX = randX / 3.f + Gdx.graphics.getWidth() / 3.f;
+        System.out.println(randX);
         obstacle.getSprite().setPosition(randX, Gdx.graphics.getHeight());
         obstacle.setCoordinateFields();
         pool.addObstacle(obstacle);

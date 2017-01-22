@@ -21,7 +21,7 @@ public class TrumpActor extends Actor {
     private Vector2 velocity;
     private final float speed = 40.f * App.getPPU();
     private float moneyTime = 0.f;
-    private float moneyDelay = 1.f;
+    private float moneyDelay = .5f;
     private float animationTime = 0.f;
     private int animationFrame = 0;
     private final float animationDelay = 0.2f;

@@ -42,7 +42,8 @@ public class ProjectilePool {
                 Obstacle obstacle = obstacleIterator.next();
                 if(proj.getSprite().getBoundingRectangle().overlaps(
                         obstacle.getSprite().getBoundingRectangle())) {
-                    obstacle.damage();
+                    if(obstacle.damage())
+                        obstacleIterator.remove();
                     proj.remove();
                     iterator.remove();
                     break;
@@ -55,7 +56,7 @@ public class ProjectilePool {
         Iterator<ProjectileActor> iterator = projectiles.iterator();
         while(iterator.hasNext()){
             ProjectileActor proj = iterator.next();
-            if(proj.hasCollision(trump)){
+            if(proj.getType() != ProjectileType.MONEY && proj.hasCollision(trump)){
                 switch(proj.getType()){
                     case AUDIT_NOTICE:
                         auditCollision(trump);
@@ -68,11 +69,9 @@ public class ProjectilePool {
                         break;
                 }
 
-                if(proj.getType() != ProjectileType.MONEY) {
-                    iterator.remove();
-                    proj.remove();
-                    continue;
-                }
+                iterator.remove();
+                proj.remove();
+                continue;
             }
 
             if(!screen.overlaps(proj.getSprite().getBoundingRectangle())) {
