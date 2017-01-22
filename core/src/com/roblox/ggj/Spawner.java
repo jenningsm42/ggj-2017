@@ -15,6 +15,8 @@ public class Spawner {
     private int min = 0;
     private int max = 2;
     private float spawnDelay = 3.f;
+    private float time = 0.f;
+    private final double rate = 0.0017f;
 
     public Spawner(ObstacleFactory factory) {
         this.factory = factory;
@@ -43,5 +45,8 @@ public class Spawner {
         } else {
             spawnAux += delta;
         }
+
+        time += delta;
+        spawnDelay = (float)(5.f * Math.exp(-Math.pow(rate * time, 4.f / 5.f)));
     }
 }

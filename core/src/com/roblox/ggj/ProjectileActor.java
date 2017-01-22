@@ -42,7 +42,10 @@ public class ProjectileActor extends Actor {
                 frames.add(new Texture("Audit3.png"));
                 break;
             case SLUR:
-                frames.add(new Texture("proj_slur.png"));
+                frames.add(new Texture("Sign1.png"));
+                frames.add(new Texture("Sign2.png"));
+                frames.add(new Texture("Sign3.png"));
+                frames.add(new Texture("Sign4.png"));
                 break;
             case MONEY:
             default:
@@ -78,15 +81,15 @@ public class ProjectileActor extends Actor {
             sprite.setTexture(frames.get(animationFrame));
         }
 
-        if(type == ProjectileType.SLUR)
-            slurBehavior(delta);
+        if(type == ProjectileType.AUDIT_NOTICE)
+            waveBehavior(delta);
 
         sprite.translate(velocity.x * delta, velocity.y * delta);
     }
 
-    public void slurBehavior(float delta) {
+    public void waveBehavior(float delta) {
         time += delta;
-        accelX = -230.f * App.getPPU() * (float)Math.cos(4.f * time);
+        accelX = -360.f * App.getPPU() * (float)Math.cos(4.f * time);
         velocity.x += accelX * delta;
         velocity.setLength(ProjectileFactory.projectileSpeed);
     }

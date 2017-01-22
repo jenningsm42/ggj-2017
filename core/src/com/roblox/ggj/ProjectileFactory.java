@@ -27,8 +27,8 @@ public class ProjectileFactory {
                 ProjectileActor projectile = new ProjectileActor(origin, velocity, type);
                 projectilePool.addProjectile(projectile);
             } break;
-            case AUDIT_NOTICE: {
-                // From auditor, home in on Trump
+            case SLUR: {
+                // From activist, throw towards trump
                 Vector2 velocity = new Vector2(
                         trump.getX() - obstacle.getX(),
                         trump.getY() - obstacle.getY()
@@ -54,8 +54,8 @@ public class ProjectileFactory {
                     projectilePool.addProjectile(new ProjectileActor(origin, velocities[i], type));
 
             } break;
-            case SLUR: {
-                // From feminists, slur will move in a wave (velocity doesn't matter)
+            case AUDIT_NOTICE: {
+                // From auditors, audit notice will move in a wave (velocity doesn't matter)
                 Vector2 origin = new Vector2(obstacle.getX(), obstacle.getY());
                 Vector2 velocity = new Vector2(0, -projectileSpeed); // Temporary!
                 projectilePool.addProjectile(new ProjectileActor(origin, velocity, type));
