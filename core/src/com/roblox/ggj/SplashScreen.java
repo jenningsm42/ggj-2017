@@ -55,7 +55,7 @@ public class SplashScreen implements Screen {
             public void run() {
                 app.setScreen(new GameScreen(app));
             }
-        }, 2.f);
+        }, 1.5f);
     }
 
     @Override

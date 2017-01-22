@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
@@ -17,10 +18,18 @@ public class GameOverScreen implements Screen {
     private Stage stage;
     private Sound politicalBS;
     private boolean soundPlayed = false;
+    private float width1, width2;
 
     public GameOverScreen(App app) {
         this.app = app;
         politicalBS = Gdx.audio.newSound(Gdx.files.internal("bullshit.wav"));
+
+        GlyphLayout layout = new GlyphLayout();
+        layout.setText(app.getBigFont(), "You didn't become");
+        width1 = layout.width;
+
+        layout.setText(app.getBigFont(), "president.");
+        width2 = layout.width;
     }
 
     @Override
@@ -45,7 +54,10 @@ public class GameOverScreen implements Screen {
         stage.draw();
 
         stage.getBatch().begin();
-        app.getFont().draw(stage.getBatch(), "You didn't become\npresident", 0, Gdx.graphics.getHeight());
+        app.getBigFont().draw(stage.getBatch(), "You didn't become",
+                (Gdx.graphics.getWidth() - width1) / 2.f, 60.f * App.getPPU());
+        app.getBigFont().draw(stage.getBatch(), "president.",
+                (Gdx.graphics.getWidth() - width2) / 2.f, 50.f * App.getPPU());
         stage.getBatch().end();
 
         while(!soundPlayed)
