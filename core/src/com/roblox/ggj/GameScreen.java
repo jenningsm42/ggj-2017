@@ -2,6 +2,7 @@ package com.roblox.ggj;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -73,9 +74,15 @@ public class GameScreen implements Screen {
         String votesStr = "Votes: " + numberFormat.format(trump.getVotes() / 1000) + "K";
 
         stage.getBatch().begin();
+
+        if(trump.getMoney() < 100000)
+            app.getFont().setColor(Color.RED);
         app.getFont().draw(stage.getBatch(), moneyStr,
             1.f * App.getPPU(),
             Gdx.graphics.getHeight() - 1.f * App.getPPU());
+        if(trump.getMoney() < 100000)
+            app.getFont().setColor(Color.WHITE);
+
         app.getFont().draw(stage.getBatch(), votesStr,
             1.f * App.getPPU(),
             Gdx.graphics.getHeight() - (1.f * App.getPPU() + 18 * Math.round(App.getScaleRatio())));

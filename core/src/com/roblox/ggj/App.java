@@ -18,7 +18,7 @@ public class App extends com.badlogic.gdx.Game {
 
 		parameter.size = 18 * Math.round(getScaleRatio());
 		font = generator.generateFont(parameter);
-		font.setColor(Color.BLACK);
+		font.setColor(Color.WHITE);
 
 		parameter.size = 28 * Math.round(getScaleRatio());
 		bigFont = generator.generateFont(parameter);

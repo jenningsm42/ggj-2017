@@ -58,8 +58,9 @@ public class TrumpActor extends Actor {
         this.projectileFactory = projectileFactory;
         this.app = app;
 
-        leftBound = 15.f * App.getPPU();
-        rightBound = (Gdx.graphics.getWidth() / App.getPPU() - 15.f) * App.getPPU();
+        float horizontalBounds = 5.f;
+        leftBound = horizontalBounds * App.getPPU();
+        rightBound = (Gdx.graphics.getWidth() / App.getPPU() - horizontalBounds) * App.getPPU();
     }
 
     public Sprite getSprite(){
