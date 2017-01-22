@@ -91,7 +91,7 @@ public class TrumpActor extends Actor {
     public void requestMoneyThrow() {
         if(money >= 50000 && moneyTime >= moneyDelay) {
             moneyTime = 0.f;
-            money -= 50000;
+            money -= 20000;
             projectileFactory.createProjectile(null, this, ProjectileType.MONEY);
         }
     }
