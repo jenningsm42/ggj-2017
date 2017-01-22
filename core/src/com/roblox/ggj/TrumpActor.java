@@ -96,8 +96,16 @@ public class TrumpActor extends Actor {
         }
 
         sprite.translate(velocity.x * delta, velocity.y * delta);
-        if(sprite.getX() < 0.f) sprite.setX(0.f);
-        if
+
+        // Ensure Trump doesn't go out of bounds
+        if(sprite.getX() < 0.f)
+            sprite.setX(0.f);
+        if(sprite.getX() + sprite.getWidth() > Gdx.graphics.getWidth())
+            sprite.setX(Gdx.graphics.getWidth() - sprite.getWidth());
+        if(sprite.getY() < 0.f)
+            sprite.setY(0.f);
+        if(sprite.getY() + sprite.getHeight() > Gdx.graphics.getHeight())
+            sprite.setY(Gdx.graphics.getHeight() - sprite.getHeight());
 
         setX(sprite.getX() + sprite.getWidth() / 2.f);
         setY(sprite.getY() + sprite.getHeight() / 2.f);
