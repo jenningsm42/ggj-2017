@@ -48,8 +48,12 @@ public class ProjectileFactory {
                 moneyThrow.play(1.0f);
                 projectilePool.addProjectile(projectile);
             } break;
-            case AUDIT_NOTICE: {
-                // From auditor, home in on Trump
+            case SLUR: {
+                int randomNum = rand.nextInt((maxSound - minSound) + 1) + minSound;
+                if (randomNum == 0)
+                    malePrivelage.play(1.0f);
+                else whiteMale.play(1.0f);
+                // From activist, throw towards trump
                 Vector2 velocity = new Vector2(
                         trump.getX() - obstacle.getX(),
                         trump.getY() - obstacle.getY()
@@ -76,13 +80,8 @@ public class ProjectileFactory {
                     projectilePool.addProjectile(new ProjectileActor(origin, velocities[i], type));
 
             } break;
-            case SLUR: {
-                int randomNum = rand.nextInt((maxSound - minSound) + 1) + minSound;
-                if (randomNum == 0)
-                    malePrivelage.play(1.0f);
-                else whiteMale.play(0.65f);
-
-                // From feminists, slur will move in a wave (velocity doesn't matter)
+            case AUDIT_NOTICE: {
+                // From auditors, audit notice will move in a wave (velocity doesn't matter)
                 Vector2 origin = new Vector2(obstacle.getX(), obstacle.getY());
                 Vector2 velocity = new Vector2(0, -projectileSpeed); // Temporary!
                 projectilePool.addProjectile(new ProjectileActor(origin, velocity, type));
