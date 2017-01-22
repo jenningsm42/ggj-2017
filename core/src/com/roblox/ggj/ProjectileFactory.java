@@ -57,7 +57,8 @@ public class ProjectileFactory {
             case SLUR: {
                 // From feminists, slur will move in a wave (velocity doesn't matter)
                 Vector2 origin = new Vector2(obstacle.getX(), obstacle.getY());
-                projectilePool.addProjectile(new ProjectileActor(origin, new Vector2(), type));
+                Vector2 velocity = new Vector2(0, -projectileSpeed); // Temporary!
+                projectilePool.addProjectile(new ProjectileActor(origin, velocity, type));
             } break;
         }
     }

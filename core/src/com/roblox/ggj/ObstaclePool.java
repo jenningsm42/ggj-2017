@@ -1,8 +1,11 @@
 package com.roblox.ggj;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -13,10 +16,12 @@ import java.util.List;
 public class ObstaclePool {
     private List<Obstacle> obstacles;
     private Stage stage;
+    private Rectangle screen;
 
     public ObstaclePool(Stage stage){
         this.stage = stage;
         obstacles = new ArrayList<Obstacle>();
+        screen = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight() + 1);
     }
 
     public void addObstacle(Obstacle obstacle){
@@ -24,12 +29,10 @@ public class ObstaclePool {
         stage.addActor(obstacle);
     }
 
-    private void removeObstacle(Obstacle obstacle){
-        obstacles.remove(obstacle);
-    }
-
     public void detectCollisions(TrumpActor trump){
-        for(Obstacle obstacle : obstacles){
+        Iterator<Obstacle> iterator = obstacles.iterator();
+        while(iterator.hasNext()) {
+            Obstacle obstacle = iterator.next();
             if(obstacle.hasCollision(trump)){
                 switch(obstacle.getType()){
                     case ACTIVIST:
@@ -42,8 +45,14 @@ public class ObstaclePool {
                         mediaCollision(trump);
                         break;
                 }
-                removeObstacle(obstacle);
                 obstacle.kill();
+                iterator.remove();
+                continue;
+            }
+
+            if(!screen.overlaps(obstacle.getSprite().getBoundingRectangle())) {
+                obstacle.remove();
+                iterator.remove();
             }
         }
     }

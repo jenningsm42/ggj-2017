@@ -37,11 +37,12 @@ public class GameScreen implements Screen {
         projectilePool = new ProjectilePool(stage);
         projectileFactory = new ProjectileFactory(projectilePool);
 
+        trump = new TrumpActor(projectileFactory);
+
         obstaclePool = new ObstaclePool(stage);
-        obstacleFactory = new ObstacleFactory(obstaclePool);
+        obstacleFactory = new ObstacleFactory(obstaclePool, projectileFactory, trump);
         spawner = new Spawner(obstacleFactory);
 
-        trump = new TrumpActor(projectileFactory);
 
         stage.addActor(trump);
     }

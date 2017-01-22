@@ -1,8 +1,12 @@
 package com.roblox.ggj;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -12,10 +16,12 @@ import java.util.List;
 public class ProjectilePool {
     private List<ProjectileActor> projectiles;
     private Stage stage;
+    private Rectangle screen;
 
     public ProjectilePool(Stage stage) {
         this.stage = stage;
         projectiles = new ArrayList<ProjectileActor>();
+        screen = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     public void addProjectile(ProjectileActor projectile) {
@@ -24,7 +30,9 @@ public class ProjectilePool {
     }
 
     public void detectCollisions(TrumpActor trump){
-        for(ProjectileActor proj : projectiles){
+        Iterator<ProjectileActor> iterator = projectiles.iterator();
+        while(iterator.hasNext()){
+            ProjectileActor proj = iterator.next();
             if(proj.hasCollision(trump)){
                 switch(proj.getType()){
                     case AUDIT_NOTICE:
@@ -33,7 +41,21 @@ public class ProjectilePool {
                     case NEWSPAPER:
                         newspaperCollision(trump);
                         break;
+                    case SLUR:
+                        slurCollision(trump);
+                        break;
                 }
+
+                if(proj.getType() != ProjectileType.MONEY) {
+                    iterator.remove();
+                    proj.remove();
+                    continue;
+                }
+            }
+
+            if(!screen.overlaps(proj.getSprite().getBoundingRectangle())) {
+                iterator.remove();
+                proj.remove();
             }
         }
     }
@@ -46,4 +68,7 @@ public class ProjectilePool {
         trump.addVotes(-250000);
     }
 
+    private void slurCollision(TrumpActor trump) {
+        trump.addVotes(-150000);
+    }
 }

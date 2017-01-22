@@ -9,12 +9,13 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Activist extends Obstacle {
 
-    public Activist(float speed){
-        super(speed);
+    public Activist(float speed, ProjectileFactory projectileFactory, TrumpActor trump) {
+        super(speed, projectileFactory, trump);
 
         frames.add(new Texture("activist.png"));
         sprite = App.createScaledSprite(frames.get(0));
         type = ObstacleType.ACTIVIST;
+        projectileType = ProjectileType.SLUR;
 
         setWidth(sprite.getWidth());
         setHeight(sprite.getHeight());
@@ -29,7 +30,7 @@ public class Activist extends Obstacle {
 
     public void kill() {
         //TODO: play distruction animation
-        clear();
+        remove();
     }
 
     public void attack(){

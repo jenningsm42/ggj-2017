@@ -9,14 +9,14 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Auditor extends Obstacle {
 
-    public Auditor(float speed){
-        super(speed);
-        super.fireRate = 1.0f;
+    public Auditor(float speed, ProjectileFactory projectileFactory, TrumpActor trump){
+        super(speed, projectileFactory, trump);
         frames.add(new Texture("Auditor_1.png"));
         frames.add(new Texture("Auditor_2.png"));
         frames.add(new Texture("Auditor_3.png"));
         sprite = App.createScaledSprite(frames.get(0));
         type = ObstacleType.AUDITOR;
+        projectileType = ProjectileType.AUDIT_NOTICE;
 
         setWidth(sprite.getWidth());
         setHeight(sprite.getHeight());
@@ -31,7 +31,7 @@ public class Auditor extends Obstacle {
 
     public void kill() {
         //TODO: play distruction animation
-        clear();
+        remove();
     }
 
     public void attack(){

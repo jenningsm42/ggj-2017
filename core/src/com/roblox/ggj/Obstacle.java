@@ -21,14 +21,20 @@ public abstract class Obstacle extends Actor {
     protected float animationDelay = 0.3f;
     protected float animationTime = 0.f;
     protected int animationFrame = 0;
+    protected float attackDelay = 1.5f;
+    protected float attackTime = 0.f;
     protected int health;
     protected float speed;
     protected Vector2 velocity;
     protected ObstacleType type;
-    protected float fireRate;
+    protected ProjectileType projectileType;
+    private ProjectileFactory projectileFactory;
+    private TrumpActor trump;
 
-    public Obstacle(float speed) {
+    public Obstacle(float speed, ProjectileFactory projectileFactory, TrumpActor trump) {
         this.speed = speed;
+        this.projectileFactory = projectileFactory;
+        this.trump = trump;
         this.health = 2;
         velocity = new Vector2(0, -speed);
         frames = new ArrayList<Texture>();
@@ -41,6 +47,12 @@ public abstract class Obstacle extends Actor {
             animationTime = 0.f;
             if(++animationFrame >= frames.size()) animationFrame = 0;
             sprite.setTexture(frames.get(animationFrame));
+        }
+
+        attackTime += delta;
+        if(attackTime >= attackDelay) {
+            attackTime = 0.f;
+            projectileFactory.createProjectile(this, trump, projectileType);
         }
     }
 
