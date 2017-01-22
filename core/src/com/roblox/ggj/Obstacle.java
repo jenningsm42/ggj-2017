@@ -22,7 +22,7 @@ public abstract class Obstacle extends Actor {
     protected float animationTime = 0.f;
     protected int animationFrame = 0;
     protected float attackDelay = 1.5f;
-    protected float attackTime = 0.f;
+    protected float attackTime = 0.75f;
     protected int health;
     protected float speed;
     protected Vector2 velocity;
