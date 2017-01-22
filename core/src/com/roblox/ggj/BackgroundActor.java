@@ -28,7 +28,7 @@ public class BackgroundActor extends Actor {
     @Override
     public void act(float delta) {
         for(int i = 0; i < 2; i++) {
-            if(backgrounds[i].getY() < -backgrounds[i].getHeight()) {
+            if(backgrounds[i].getY() <= -backgrounds[i].getHeight() + scrollSpeed * (1.2f * delta)) {
                 int idx = (i == 0? 1 : 0);
                 backgrounds[i].setY(backgrounds[idx].getY() + backgrounds[idx].getHeight() - 1);
             }
