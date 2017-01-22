@@ -68,7 +68,7 @@ public class TrumpActor extends Actor {
     public void addVotes(int amount) {
         votes += amount;
         if(votes <= 0) {
-            app.setScreen(new GameScreen(app));
+            app.setScreen(new GameOverScreen(app));
         }
     }
 

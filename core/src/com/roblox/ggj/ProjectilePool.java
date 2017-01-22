@@ -23,7 +23,8 @@ public class ProjectilePool {
         this.stage = stage;
         this.obstaclePool = obstaclePool;
         projectiles = new ArrayList<ProjectileActor>();
-        screen = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        screen = new Rectangle(-50.f * App.getPPU(), 0,
+            Gdx.graphics.getWidth() + 50.f * App.getPPU(), Gdx.graphics.getHeight());
     }
 
     public void addProjectile(ProjectileActor projectile) {
