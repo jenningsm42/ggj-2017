@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class App extends com.badlogic.gdx.Game {
 	private BitmapFont font;
+	private BitmapFont bigFont;
 
 	@Override
 	public void create () {
@@ -19,11 +20,19 @@ public class App extends com.badlogic.gdx.Game {
 		font = generator.generateFont(parameter);
 		font.setColor(Color.BLACK);
 
+		parameter.size = 28 * Math.round(getScaleRatio());
+		bigFont = generator.generateFont(parameter);
+		bigFont.setColor(Color.BLACK);
+
 		setScreen(new SplashScreen(this));
 	}
 
 	public BitmapFont getFont() {
 		return font;
+	}
+
+	public BitmapFont getBigFont() {
+		return bigFont;
 	}
 
 	public static Sprite createScaledSprite(Texture texture) {

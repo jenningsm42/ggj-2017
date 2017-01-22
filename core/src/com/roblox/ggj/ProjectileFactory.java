@@ -52,7 +52,7 @@ public class ProjectileFactory {
                 int randomNum = rand.nextInt((maxSound - minSound) + 1) + minSound;
                 if (randomNum == 0)
                     malePrivelage.play(1.0f);
-                else whiteMale.play(1.0f);
+                else whiteMale.play(0.7f);
                 // From activist, throw towards trump
                 Vector2 velocity = new Vector2(
                         trump.getX() - obstacle.getX(),
