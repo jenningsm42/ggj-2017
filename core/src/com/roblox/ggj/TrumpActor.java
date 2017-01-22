@@ -31,6 +31,8 @@ public class TrumpActor extends Actor {
     private int money = 1000000;
     private int votes = 1000000;
     private float moneyRate = 0.005f;
+    private float moneyGainTime = 5.f;
+    private float moneyGainDelay = 5.f; // When hit by an audit notice
 
     TrumpActor(ProjectileFactory projectileFactory, App app) {
         frames = new ArrayList<Texture>();
@@ -82,6 +84,10 @@ public class TrumpActor extends Actor {
         this.velocity = vector.scl(speed);
     }
 
+    public void resetMoneyGainTimer() {
+        moneyGainTime = 0.f;
+    }
+
     public void requestMoneyThrow() {
         if(money >= 50000 && moneyTime >= moneyDelay) {
             moneyTime = 0.f;
@@ -115,8 +121,11 @@ public class TrumpActor extends Actor {
         setY(sprite.getY() + sprite.getHeight() / 2.f);
 
         moneyTime += delta;
+        moneyGainTime += delta;
         animationTime += delta;
-        this.addMoney(Math.round(votes * moneyRate * delta));
+
+        if(moneyGainTime >= moneyGainDelay)
+            this.addMoney(Math.round(votes * moneyRate * delta));
     }
 
     @Override

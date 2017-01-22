@@ -31,7 +31,7 @@ public class ProjectilePool {
         stage.addActor(projectile);
     }
 
-    public void trumpStrikesAgain(){
+    public void trumpStrikesAgain(TrumpActor trump){
         Iterator<ProjectileActor> iterator = projectiles.iterator();
         while(iterator.hasNext()){
             ProjectileActor proj = iterator.next();
@@ -42,8 +42,10 @@ public class ProjectilePool {
                 Obstacle obstacle = obstacleIterator.next();
                 if(proj.getSprite().getBoundingRectangle().overlaps(
                         obstacle.getSprite().getBoundingRectangle())) {
-                    if(obstacle.damage())
+                    if(obstacle.damage()) {
                         obstacleIterator.remove();
+                        trump.addVotes(500000);
+                    }
                     proj.remove();
                     iterator.remove();
                     break;
@@ -79,11 +81,12 @@ public class ProjectilePool {
                 proj.remove();
             }
         }
-        trumpStrikesAgain();
+        trumpStrikesAgain(trump);
     }
 
     private void auditCollision(TrumpActor trump){
         trump.addMoney(-100000);
+        trump.resetMoneyGainTimer();
     }
 
     private void newspaperCollision(TrumpActor trump){

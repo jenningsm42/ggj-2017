@@ -36,8 +36,8 @@ public class Media extends Obstacle {
         float dx = target.x - getX();
         float dy = target.y - getY();
         if(dx*dx + dy*dy < 5.f * App.getPPU()) {
-            target.x = random.nextFloat() * 20.f * App.getPPU() + Gdx.graphics.getWidth() / 2.f - 10.f * App.getPPU();
-            target.y = random.nextFloat() * 15.f * App.getPPU() + 65.f * App.getPPU();
+            target.x = random.nextFloat() * 40.f * App.getPPU() + Gdx.graphics.getWidth() / 2.f - 20.f * App.getPPU();
+            target.y = random.nextFloat() * 25.f * App.getPPU() + 60.f * App.getPPU();
 
             dx = target.x - getX();
             dy = target.y - getY();
