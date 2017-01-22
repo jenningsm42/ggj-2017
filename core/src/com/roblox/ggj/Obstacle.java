@@ -31,7 +31,7 @@ public abstract class Obstacle extends Actor {
     protected int lives;
 
     private ProjectileFactory projectileFactory;
-    private TrumpActor trump;
+    protected TrumpActor trump;
 
     public Obstacle(float speed, ProjectileFactory projectileFactory, TrumpActor trump) {
         this.speed = speed;
@@ -65,7 +65,13 @@ public abstract class Obstacle extends Actor {
 
     public abstract void kill();
 
-    public abstract void damage();
+    public boolean damage() {
+        if(--lives < 1) {
+            kill();
+            return true;
+        }
+        return false;
+    }
 
     public boolean hasCollision(TrumpActor trump){
         return sprite.getBoundingRectangle().overlaps(trump.getSprite().getBoundingRectangle());

@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
  */
 
 public class Auditor extends Obstacle {
+    private float accelerationX;
+    private final float maxAccel = 28.f * App.getPPU();
+    private final float maxXVel = 10.f * App.getPPU();
 
     public Auditor(float speed, ProjectileFactory projectileFactory, TrumpActor trump){
         super(speed, projectileFactory, trump);
@@ -22,20 +25,21 @@ public class Auditor extends Obstacle {
         setWidth(sprite.getWidth());
         setHeight(sprite.getHeight());
         lives = 2;
+        accelerationX = 0.f;
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+
+        accelerationX = (trump.getX() < getX()? -maxAccel : maxAccel);
+
+        velocity.x += accelerationX * delta;
+        if(Math.abs(velocity.x) > maxXVel)
+            velocity.x = Math.signum(velocity.x) * maxXVel;
+        velocity.setLength(speed);
         sprite.translate(velocity.x * delta, velocity.y * delta);
         setCoordinateFields();
-    }
-
-    public void damage(){
-        if(lives == 1)
-            kill();
-        else
-            lives--;
     }
 
     public void kill() {

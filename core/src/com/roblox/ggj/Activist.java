@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
  */
 
 public class Activist extends Obstacle {
+    private float accelerationX;
+    private float time;
+    private float amplitude;
 
     public Activist(float speed, ProjectileFactory projectileFactory, TrumpActor trump) {
         super(speed, projectileFactory, trump);
@@ -23,17 +26,21 @@ public class Activist extends Obstacle {
         setWidth(sprite.getWidth());
         setHeight(sprite.getHeight());
         this.lives = 1;
+        accelerationX = 0.f;
+        time = 0.f;
+        amplitude = 120.f * App.getPPU();
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        time += delta;
+
+        accelerationX = amplitude * (float)Math.cos(4.f * time);
+        velocity.x += accelerationX * delta;
+        velocity.setLength(speed);
         sprite.translate(velocity.x * delta, velocity.y * delta);
         setCoordinateFields();
-    }
-
-    public void damage(){
-        kill();
     }
 
     public void kill() {

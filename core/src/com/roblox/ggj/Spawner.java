@@ -14,6 +14,7 @@ public class Spawner {
     private Random rand;
     private int min = 0;
     private int max = 2;
+    private float spawnDelay = 3.f;
 
     public Spawner(ObstacleFactory factory) {
         this.factory = factory;
@@ -36,7 +37,7 @@ public class Spawner {
     }
 
     public void updateSpawn(float delta) {
-        if (spawnAux >= 5.f) {
+        if (spawnAux >= spawnDelay) {
             spawnAux = 0;
             spawn();
         } else {
