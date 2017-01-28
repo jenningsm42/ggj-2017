@@ -74,7 +74,7 @@ public abstract class Obstacle extends Actor {
     }
 
     public boolean hasCollision(TrumpActor trump){
-        return sprite.getBoundingRectangle().overlaps(trump.getSprite().getBoundingRectangle());
+        return sprite.getBoundingRectangle().overlaps(trump.getHitBox());
     }
 
     public Sprite getSprite(){

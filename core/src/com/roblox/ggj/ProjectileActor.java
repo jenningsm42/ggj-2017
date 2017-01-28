@@ -63,7 +63,7 @@ public class ProjectileActor extends Actor {
     }
 
     public boolean hasCollision(TrumpActor Trump){
-        return sprite.getBoundingRectangle().overlaps(Trump.getSprite().getBoundingRectangle());
+        return sprite.getBoundingRectangle().overlaps(Trump.getHitBox());
     }
 
     public Sprite getSprite(){

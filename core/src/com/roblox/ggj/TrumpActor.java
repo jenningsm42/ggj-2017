@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -27,6 +28,7 @@ public class TrumpActor extends Actor {
     private final float animationDelay = 0.2f;
     private ProjectileFactory projectileFactory;
     private App app;
+    private Rectangle hitBox;
     private float leftBound;
     private float rightBound;
 
@@ -48,6 +50,12 @@ public class TrumpActor extends Actor {
         sprite.setX((Gdx.graphics.getWidth() - sprite.getWidth()) / 2.f);
         sprite.setY(15.f * App.getPPU());
 
+        hitBox = new Rectangle(0.f, 0.f, sprite.getWidth() / 2.f, sprite.getHeight() / 2.f);
+        hitBox.setPosition(
+                sprite.getX() + sprite.getWidth() / 4.f,
+                sprite.getY() + sprite.getHeight() / 4.f
+        );
+
         velocity = new Vector2();
 
         setX(sprite.getX() + sprite.getWidth() / 2.f);
@@ -65,6 +73,10 @@ public class TrumpActor extends Actor {
 
     public Sprite getSprite(){
         return sprite;
+    }
+
+    public Rectangle getHitBox() {
+        return hitBox;
     }
 
     public void addMoney(int amount) {
@@ -126,6 +138,11 @@ public class TrumpActor extends Actor {
             sprite.setY(Gdx.graphics.getHeight() - sprite.getHeight());
         setX(sprite.getX() + sprite.getWidth() / 2.f);
         setY(sprite.getY() + sprite.getHeight() / 2.f);
+
+        hitBox.setPosition(
+                sprite.getX() + sprite.getWidth() / 4.f,
+                sprite.getY() + sprite.getHeight() / 4.f
+        );
 
         moneyTime += delta;
         moneyGainTime += delta;

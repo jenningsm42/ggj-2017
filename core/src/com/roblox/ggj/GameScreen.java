@@ -16,7 +16,11 @@ import java.util.Locale;
 
 public class GameScreen implements Screen {
     private App app;
-    private Stage stage;
+    private Stage stageUI;
+    private Stage stageForeground;
+    private Stage stageObstacles;
+    private Stage stageProjectiles;
+    private Stage stageBackground;
     private ProjectilePool projectilePool;
     private ProjectileFactory projectileFactory;
     private ObstaclePool obstaclePool;
@@ -34,11 +38,15 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
+        stageUI = new Stage();
+        stageForeground = new Stage();
+        stageObstacles = new Stage();
+        stageProjectiles = new Stage();
+        stageBackground = new Stage();
+        Gdx.input.setInputProcessor(stageUI);
 
-        obstaclePool = new ObstaclePool(stage);
-        projectilePool = new ProjectilePool(stage, obstaclePool);
+        obstaclePool = new ObstaclePool(stageObstacles);
+        projectilePool = new ProjectilePool(stageProjectiles, obstaclePool);
 
         projectileFactory = new ProjectileFactory(projectilePool);
         trump = new TrumpActor(projectileFactory, app);
@@ -50,10 +58,10 @@ public class GameScreen implements Screen {
 
         bg = new BackgroundActor();
 
-        stage.addActor(bg);
-        stage.addActor(trump);
-        stage.addActor(joystick);
-        stage.addActor(button);
+        stageBackground.addActor(bg);
+        stageForeground.addActor(trump);
+        stageUI.addActor(joystick);
+        stageUI.addActor(button);
     }
 
     @Override
@@ -66,27 +74,36 @@ public class GameScreen implements Screen {
         obstaclePool.detectCollisions(trump);
         projectilePool.detectCollisions(trump);
 
-        stage.act(delta);
-        stage.draw();
+        stageBackground.act(delta);
+        stageProjectiles.act(delta);
+        stageObstacles.act(delta);
+        stageForeground.act(delta);
+        stageUI.act(delta);
+
+        stageBackground.draw();
+        stageProjectiles.draw();
+        stageObstacles.draw();
+        stageForeground.draw();
+        stageUI.draw();
 
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
         String moneyStr = "Money: " + (trump.getMoney() < 0? "-$" : "$") + numberFormat.format(Math.abs(trump.getMoney()));
         String votesStr = "Votes: " + numberFormat.format(trump.getVotes() / 1000) + "K";
 
-        stage.getBatch().begin();
+        stageUI.getBatch().begin();
 
         if(trump.getMoney() < 100000)
             app.getFont().setColor(Color.RED);
-        app.getFont().draw(stage.getBatch(), moneyStr,
+        app.getFont().draw(stageUI.getBatch(), moneyStr,
             1.f * App.getPPU(),
             Gdx.graphics.getHeight() - 1.f * App.getPPU());
         if(trump.getMoney() < 100000)
             app.getFont().setColor(Color.WHITE);
 
-        app.getFont().draw(stage.getBatch(), votesStr,
+        app.getFont().draw(stageUI.getBatch(), votesStr,
             1.f * App.getPPU(),
             Gdx.graphics.getHeight() - (1.f * App.getPPU() + 18 * Math.round(App.getScaleRatio())));
-        stage.getBatch().end();
+        stageUI.getBatch().end();
     }
 
     @Override

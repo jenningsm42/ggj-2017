@@ -32,7 +32,6 @@ public class GameOverScreen implements Screen {
     @Override
     public void show() {
         stage = new Stage();
-        stage.addActor(new Actor());
 
         Timer.schedule(new Timer.Task() {
             @Override
